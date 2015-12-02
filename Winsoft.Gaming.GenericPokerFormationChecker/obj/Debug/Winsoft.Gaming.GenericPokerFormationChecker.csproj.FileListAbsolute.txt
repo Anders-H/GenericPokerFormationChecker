@@ -1,0 +1,5 @@
+C:\Jobb\Privata_projekt\Winsoft.Gaming.GenericPokerFormationChecker\Winsoft.Gaming.GenericPokerFormationChecker\bin\Debug\Winsoft.Gaming.GenericPokerFormationChecker.dll
+C:\Jobb\Privata_projekt\Winsoft.Gaming.GenericPokerFormationChecker\Winsoft.Gaming.GenericPokerFormationChecker\bin\Debug\Winsoft.Gaming.GenericPokerFormationChecker.pdb
+C:\Jobb\Privata_projekt\Winsoft.Gaming.GenericPokerFormationChecker\Winsoft.Gaming.GenericPokerFormationChecker\obj\Debug\Winsoft.Gaming.GenericPokerFormationChecker.csprojResolveAssemblyReference.cache
+C:\Jobb\Privata_projekt\Winsoft.Gaming.GenericPokerFormationChecker\Winsoft.Gaming.GenericPokerFormationChecker\obj\Debug\Winsoft.Gaming.GenericPokerFormationChecker.dll
+C:\Jobb\Privata_projekt\Winsoft.Gaming.GenericPokerFormationChecker\Winsoft.Gaming.GenericPokerFormationChecker\obj\Debug\Winsoft.Gaming.GenericPokerFormationChecker.pdb
