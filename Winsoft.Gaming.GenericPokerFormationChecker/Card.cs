@@ -40,7 +40,7 @@ namespace Winsoft.Gaming.GenericPokerFormationChecker
             case "DMN": suit = Suits.Diamonds; break;
             case "CLB": suit = Suits.Clubs; break;
             case "SPD": suit = Suits.Spades; break;
-            default: throw new Exceptions.ParseCardFailed(string.Format("{0} cannot be parsed as a suit. A suit is described as HRT, DMN, CLB or SPD.", suit_string));
+            default: throw new Exceptions.ParseSuitFailed($"{suit_string} cannot be parsed as a suit. A suit is described as HRT, DMN, CLB or SPD.");
          }
          var value_string = card.Substring(3);
          var value = Values.Ace;
@@ -59,14 +59,12 @@ namespace Winsoft.Gaming.GenericPokerFormationChecker
             case "QU": case "12": value = Values.Queen; break;
             case "KI": case "13": value = Values.King; break;
             case "AC": case "01": case "14": value = Values.Ace; break;
+            default: throw new Exceptions.ParseValueFailed($"{value_string} cannot be parsed as a value. A value is described as 02, 03, 04, 05, 06, 07, 08, 09, 10, KN, QU, KI or AC.");
          }
 
       }
 
-      public static Card Create(Suits suit, Values value)
-      {
-         return new Card(suit, value);
-      }
+      public static Card Create(Suits suit, Values value) => new Card(suit, value);
 
       public static Card Create(Suits suit, int two_based_value)
       {
@@ -101,13 +99,9 @@ namespace Winsoft.Gaming.GenericPokerFormationChecker
          }
       }
 
-      public int Score { get { return (int)this.Value; } }
-      internal int SortScore { get { return (this.Score * 100) + (int)this.Suit; } }
-
-      public int CompareTo(Card other)
-      {
-         return this.SortScore == other.SortScore ? 0 : this.SortScore > other.SortScore ? 1 : -1;
-      }
+      public int Score => (int)this.Value;
+      internal int SortScore => (this.Score * 100) + (int)this.Suit;
+      public int CompareTo(Card other) => this.SortScore == other.SortScore ? 0 : this.SortScore > other.SortScore ? 1 : -1;
 
       public override string ToString()
       {

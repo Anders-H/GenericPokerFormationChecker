@@ -20,6 +20,13 @@ namespace Winsoft.Gaming.GenericPokerFormationChecker.Exceptions
       }
    }
 
+   public class ParseValueFailed : ParseCardFailed
+   {
+      internal ParseValueFailed(string message) : base(message)
+      {
+      }
+   }
+
    public class ParseHandFailed : Exception
    {
       internal ParseHandFailed(string message) : base(message)
