@@ -14,13 +14,12 @@ namespace Winsoft.Gaming.GenericPokerFormationChecker
 
       public Suits Suit { get; private set; }
       public Values Value { get; private set; }
-      public bool InFormation { get; internal set; }
+      public bool InFormation { get; internal set; } = false;
 
       public Card(Suits suit, Values value)
       {
          this.Suit = suit;
          this.Value = value;
-         this.InFormation = false;
       }
 
       public static Card Parse(string card)
@@ -34,16 +33,33 @@ namespace Winsoft.Gaming.GenericPokerFormationChecker
          if (!(card.Length == 5))
             throw new Exceptions.ParseCardFailed(string.Format(description, card));
          var suit_string = card.Substring(0, 3);
-         switch(suit_string)
+         var suit = Suits.Hearts;
+         switch (suit_string)
          {
-            case "HRT":
-            case "DMN":
-            case "CLB":
-            case "SPD":
-            default:
-               throw new Exceptions.ParseCardFailed(string.Format("{0} cannot be parsed as a suit. A suit is described as HRT, DMN, CLB or SPD.", suit_string));
+            case "HRT": suit = Suits.Hearts; break;
+            case "DMN": suit = Suits.Diamonds; break;
+            case "CLB": suit = Suits.Clubs; break;
+            case "SPD": suit = Suits.Spades; break;
+            default: throw new Exceptions.ParseCardFailed(string.Format("{0} cannot be parsed as a suit. A suit is described as HRT, DMN, CLB or SPD.", suit_string));
          }
-         var value_strign = card.Substring(3);
+         var value_string = card.Substring(3);
+         var value = Values.Ace;
+         switch (value_string)
+         {
+            case "02": value = Values._2; break;
+            case "03": value = Values._3; break;
+            case "04": value = Values._4; break;
+            case "05": value = Values._5; break;
+            case "06": value = Values._6; break;
+            case "07": value = Values._7; break;
+            case "08": value = Values._8; break;
+            case "09": value = Values._9; break;
+            case "10": value = Values._10; break;
+            case "KN": case "11": value = Values.Knight; break;
+            case "QU": case "12": value = Values.Queen; break;
+            case "KI": case "13": value = Values.King; break;
+            case "AC": case "01": case "14": value = Values.Ace; break;
+         }
 
       }
 
