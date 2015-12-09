@@ -65,11 +65,8 @@ namespace Winsoft.Gaming.GenericPokerFormationChecker
             return new Card(suit, value);
         }
 
-        public static Card Create(Suit suit, Value value)
-        {
-            return new Card(suit, value);
-        }
-
+        public static Card Create(Suit suit, Value value) => new Card(suit, value);
+        
         public static Card Create(Suit suit, int two_based_value)
         {
             two_based_value = two_based_value == 1 ? 14 : two_based_value;
