@@ -1,8 +1,0 @@
-C:\Jobb\Privata_projekt\Winsoft.Gaming.GenericPokerFormationChecker\TestConsole\bin\Debug\TestConsole.exe.config
-C:\Jobb\Privata_projekt\Winsoft.Gaming.GenericPokerFormationChecker\TestConsole\bin\Debug\TestConsole.exe
-C:\Jobb\Privata_projekt\Winsoft.Gaming.GenericPokerFormationChecker\TestConsole\bin\Debug\TestConsole.pdb
-C:\Jobb\Privata_projekt\Winsoft.Gaming.GenericPokerFormationChecker\TestConsole\bin\Debug\Winsoft.Gaming.GenericPokerFormationChecker.dll
-C:\Jobb\Privata_projekt\Winsoft.Gaming.GenericPokerFormationChecker\TestConsole\bin\Debug\Winsoft.Gaming.GenericPokerFormationChecker.pdb
-C:\Jobb\Privata_projekt\Winsoft.Gaming.GenericPokerFormationChecker\TestConsole\obj\Debug\TestConsole.csprojResolveAssemblyReference.cache
-C:\Jobb\Privata_projekt\Winsoft.Gaming.GenericPokerFormationChecker\TestConsole\obj\Debug\TestConsole.exe
-C:\Jobb\Privata_projekt\Winsoft.Gaming.GenericPokerFormationChecker\TestConsole\obj\Debug\TestConsole.pdb
