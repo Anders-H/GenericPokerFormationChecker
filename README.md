@@ -18,7 +18,7 @@ namespace ConsoleApplication1
         static void Main(string[] args)
         {
             //Create a formation checker. Add five cards as string.
-            var fm = new FormationChecker("HRT02, SPD03, HRT04, DMN05, CLB06"); //Input
+            var fm = new FormationChecker("HRT02, SPD03, HRT04, DMN05, CLB06"); //Input. Exception if string contains errors.
 
             //This will give true the formation is expressed correctly.
             fm.CheckFormation();
