@@ -103,10 +103,7 @@ namespace Winsoft.Gaming.GenericPokerFormationChecker
         public int Score { get { return (int)this.Value; } }
         internal int SortScore { get { return (this.Score * 100) + (int)this.Suit; } }
 
-        public int CompareTo(Card other)
-        {
-            return this.SortScore == other.SortScore ? 0 : this.SortScore > other.SortScore ? 1 : -1;
-        }
+        public int CompareTo(Card other) => this.SortScore == other.SortScore ? 0 : this.SortScore > other.SortScore ? 1 : -1;
 
         public override string ToString()
         {
