@@ -1,3 +1,5 @@
 [Oo]bj/
 [Bb]in/
 .nuget/
+.vs
+
