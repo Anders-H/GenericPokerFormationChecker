@@ -28,12 +28,12 @@ namespace Winsoft.Gaming.GenericPokerFormationChecker
         {
             var description = "{0} cannot be parsed as a playing card. A card is described as CCCVV where CCC is HRT, DMN, CLB or SPD and VV is 02-10, KN, QU, KI or AC.";
             if (card == null)
-                throw new Exceptions.ParseCardFailed(string.Format(description, "Null"));
+                throw new Exceptions.ParseCardFailedException(string.Format(description, "Null"));
             card = card.Trim().ToUpper();
             if (card == "")
-                throw new Exceptions.ParseCardFailed(string.Format(description, "An empty string"));
+                throw new Exceptions.ParseCardFailedException(string.Format(description, "An empty string"));
             if (!(card.Length == 5))
-                throw new Exceptions.ParseCardFailed(string.Format(description, card));
+                throw new Exceptions.ParseCardFailedException(string.Format(description, card));
             var suit_string = card.Substring(0, 3);
             var suit = Suit.Hearts;
             switch (suit_string)
@@ -42,7 +42,7 @@ namespace Winsoft.Gaming.GenericPokerFormationChecker
                 case "DMN": suit = Suit.Diamonds; break;
                 case "CLB": suit = Suit.Clubs; break;
                 case "SPD": suit = Suit.Spades; break;
-                default: throw new Exceptions.ParseCardFailed(string.Format("{0} cannot be parsed as a suit. A suit is described as HRT, DMN, CLB or SPD.", suit_string));
+                default: throw new Exceptions.ParseCardFailedException(string.Format("{0} cannot be parsed as a suit. A suit is described as HRT, DMN, CLB or SPD.", suit_string));
             }
             var value_string = card.Substring(3);
             var value = Value.Ace;
@@ -132,5 +132,9 @@ namespace Winsoft.Gaming.GenericPokerFormationChecker
             }
             return s.ToString();
         }
+
+        public static bool operator ==(Card a, Card b) => a?.Color == b?.Color && a?.Value == b?.Value;
+
+        public static bool operator !=(Card a, Card b) => !(a == b);
     }
 }

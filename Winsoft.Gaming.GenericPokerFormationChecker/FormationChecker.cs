@@ -18,24 +18,35 @@ namespace Winsoft.Gaming.GenericPokerFormationChecker
             this.Cards = new Card[5];
             this.Formation = Formation.Nothing;
             if (hand.IndexOf(',') < 0)
-                throw new Exceptions.ParseHandFailed("A hand is a comma separated string with five cards. Example: SPDAC, SPD02, SPD03, SPD04, SPD05");
+                throw new Exceptions.ParseHandFailedException("A hand is a comma separated string with five cards. Example: SPDAC, SPD02, SPD03, SPD04, SPD05");
             var hand_splt = hand.Split(',');
             if (!(hand_splt.Length == 5))
-                throw new Exceptions.ParseHandFailed("A hand is a comma separated string with five cards. Example: HRT10, HRTKN, HRTQU, HRTKI, HRTAC");
+                throw new Exceptions.ParseHandFailedException("A hand is a comma separated string with five cards. Example: HRT10, HRTKN, HRTQU, HRTKI, HRTAC");
             for (int i = 0; i < 5; i++)
             {
                 try
                 {
-                    this.Cards[i] = Card.Parse(hand_splt[i].Trim().ToUpper());
+                    var card = Card.Parse(hand_splt[i].Trim().ToUpper());
+                    if (i > 0)
+                    {
+                        for (int j = 0; j < i; j++)
+                            if (Cards[j] == card)
+                                throw new Exceptions.DuplicateCardException($"Card {i + 1} ({card}) is a duplicate.");
+                    }
+                    this.Cards[i] = card;
                 }
-                catch (Exceptions.ParseCardFailed ex)
+                catch (Exceptions.DuplicateCardException ex)
+                {
+                    throw ex;
+                }
+                catch (Exceptions.ParseCardFailedException ex)
                 {
                     var message = ex.Message;
-                    throw new Exceptions.ParseCardFailed($"Failed to parse card {(i + 1)}/5: {message}");
+                    throw new Exceptions.ParseCardFailedException($"Failed to parse card {(i + 1)}/5: {message}");
                 }
                 catch
                 {
-                    throw new Exceptions.ParseHandFailed($"Failed to parse card {(i + 1)}/5.");
+                    throw new Exceptions.ParseHandFailedException($"Failed to parse card {(i + 1)}/5.");
                 }
             }
         }

@@ -6,23 +6,30 @@ using System.Threading.Tasks;
 
 namespace Winsoft.Gaming.GenericPokerFormationChecker.Exceptions
 {
-    public class ParseCardFailed : Exception
+    public class ParseCardFailedException : SystemException
     {
-        internal ParseCardFailed(string message) : base(message)
+        internal ParseCardFailedException(string message) : base(message)
         {
         }
     }
 
-    public class ParseSuitFailed : ParseCardFailed
+    public class ParseSuitFailedException : ParseCardFailedException
     {
-        internal ParseSuitFailed(string message) : base(message)
+        internal ParseSuitFailedException(string message) : base(message)
         {
         }
     }
 
-    public class ParseHandFailed : Exception
+    public class ParseHandFailedException : SystemException
     {
-        internal ParseHandFailed(string message) : base(message)
+        internal ParseHandFailedException(string message) : base(message)
+        {
+        }
+    }
+
+    public class DuplicateCardException : SystemException
+    {
+        public DuplicateCardException(string message) : base(message)
         {
         }
     }
