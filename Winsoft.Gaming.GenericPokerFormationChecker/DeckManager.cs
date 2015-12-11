@@ -16,6 +16,29 @@ namespace Winsoft.Gaming.GenericPokerFormationChecker
             return deck.Pop();
         }
 
+
+        public string PopHand()
+        {
+            if (!(CanPopHand))
+            {
+                deck = new Deck();
+                deck.Shuffle();
+            }
+            string[] cards = { Pop(), Pop(), Pop(), Pop(), Pop() };
+            var s = new StringBuilder();
+            for (int i = 0; i < 5; i++)
+                s.Append(cards[i].ToString() + (i < 4 ? ", " : ""));
+            return s.ToString();
+        }
+
+        public Tuple<string, string> PopHands(int secondHandQuality)
+        {
+            //TODO: Read quality parameter.
+            return Tuple.Create(PopHand(), PopHand());
+        }
+
+        public bool CanPopHand { get { return Count >= 5; } }
+
         public int Count { get { CheckDeckCapacity(); return deck.Count; } }
 
         private void CheckDeckCapacity()

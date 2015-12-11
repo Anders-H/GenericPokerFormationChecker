@@ -9,6 +9,8 @@ namespace TestConsole
 {
     class Program
     {
+        private static Random rnd { get; } = new Random();
+
         static void Main(string[] args)
         {
             do
@@ -70,7 +72,21 @@ namespace TestConsole
 
         public static void TestDeckManager()
         {
-
+            var dm = new DeckManager();
+            var hand_2_quality = rnd.Next(100);
+            var hands = dm.PopHands(hand_2_quality);
+            Console.ForegroundColor = ConsoleColor.Blue;
+            Console.WriteLine("Hand 1:");
+            var f = new FormationChecker(hands.Item1);
+            f.CheckFormation();
+            Console.ForegroundColor = ConsoleColor.Cyan;
+            Console.WriteLine(f.ToString());
+            Console.ForegroundColor = ConsoleColor.Blue;
+            Console.WriteLine("Hand 2:");
+            f = new FormationChecker(hands.Item2);
+            f.CheckFormation();
+            Console.ForegroundColor = ConsoleColor.Cyan;
+            Console.WriteLine(f.ToString());
         }
 
     }
