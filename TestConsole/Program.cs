@@ -82,7 +82,7 @@ namespace TestConsole
             Console.ForegroundColor = ConsoleColor.Cyan;
             Console.WriteLine(f.ToString());
             Console.ForegroundColor = ConsoleColor.Blue;
-            Console.WriteLine("Hand 2:");
+            Console.WriteLine($"Hand 2 (quality {hand_2_quality}):");
             f = new FormationChecker(hands.Item2);
             f.CheckFormation();
             Console.ForegroundColor = ConsoleColor.Cyan;

@@ -33,7 +33,8 @@ namespace Winsoft.Gaming.GenericPokerFormationChecker
 
         public Tuple<string, string> PopHands(int secondHandQuality)
         {
-            //TODO: Read quality parameter.
+            var deckCount = secondHandQuality > 0 ? (int)(secondHandQuality / 8) : 0;
+            var redealCount = secondHandQuality % 8;
             return Tuple.Create(PopHand(), PopHand());
         }
 
