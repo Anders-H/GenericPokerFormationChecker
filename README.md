@@ -1,7 +1,11 @@
 # GenericPokerFormationChecker
 A class that can identify poker hands.
 
-Example code:
+**Install version 1.0.0 from NuGet:**
+
+```Install-Package PokerFormationChecker```
+
+**Example code:**
 
 ```C#
 using System;
