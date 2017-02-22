@@ -14,3 +14,8 @@ C:\Jobb\Privata_projekt\GenericPokerFormationChecker\Winsoft.Gaming.GenericPoker
 C:\Jobb\Privata_projekt\GenericPokerFormationChecker\Winsoft.Gaming.GenericPokerFormationChecker\obj\Debug\Winsoft.Gaming.GenericPokerFormationChecker.csprojResolveAssemblyReference.cache
 C:\Jobb\Privata_projekt\GenericPokerFormationChecker\Winsoft.Gaming.GenericPokerFormationChecker\obj\Debug\Winsoft.Gaming.GenericPokerFormationChecker.dll
 C:\Jobb\Privata_projekt\GenericPokerFormationChecker\Winsoft.Gaming.GenericPokerFormationChecker\obj\Debug\Winsoft.Gaming.GenericPokerFormationChecker.pdb
+C:\Jobb\PokerFormationChecker\Winsoft.Gaming.GenericPokerFormationChecker\bin\Debug\Winsoft.Gaming.GenericPokerFormationChecker.dll
+C:\Jobb\PokerFormationChecker\Winsoft.Gaming.GenericPokerFormationChecker\bin\Debug\Winsoft.Gaming.GenericPokerFormationChecker.pdb
+C:\Jobb\PokerFormationChecker\Winsoft.Gaming.GenericPokerFormationChecker\obj\Debug\Winsoft.Gaming.GenericPokerFormationChecker.csprojResolveAssemblyReference.cache
+C:\Jobb\PokerFormationChecker\Winsoft.Gaming.GenericPokerFormationChecker\obj\Debug\Winsoft.Gaming.GenericPokerFormationChecker.dll
+C:\Jobb\PokerFormationChecker\Winsoft.Gaming.GenericPokerFormationChecker\obj\Debug\Winsoft.Gaming.GenericPokerFormationChecker.pdb

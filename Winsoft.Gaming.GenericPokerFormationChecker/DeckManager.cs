@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Winsoft.Gaming.GenericPokerFormationChecker
 {
@@ -11,33 +9,25 @@ namespace Winsoft.Gaming.GenericPokerFormationChecker
     /// </summary>
     public class DeckManager
     {
-        private Deck deck { get; set; }
-
+        private Deck Deck { get; set; }
         public string Pop()
         {
             CheckDeckCapacity();
-            return deck.Pop();
+            return Deck.Pop();
         }
-
-
         public string PopHand()
         {
-            if (!(CanPopHand))
+            if (!CanPopHand)
             {
-                deck = new Deck();
-                deck.Shuffle();
+                Deck = new Deck();
+                Deck.Shuffle();
             }
             string[] cards = { Pop(), Pop(), Pop(), Pop(), Pop() };
-            var s = new StringBuilder();
-            for (int i = 0; i < 5; i++)
-                s.Append(cards[i].ToString() + (i < 4 ? ", " : ""));
-            return s.ToString();
+            return string.Join(", ", cards);
         }
-
-
         private class NewDeckStructure
         {
-            private int highestDeck2Score = -1;
+            private int _highestDeck2Score = -1;
             internal string Hand1 { get; set; }
             internal List<Tuple<string, int>> Hands2 { get; set; } = new List<Tuple<string, int>>();
             internal Deck Deck { get; set; }
@@ -45,18 +35,16 @@ namespace Winsoft.Gaming.GenericPokerFormationChecker
             {
                 get
                 {
-                    if (highestDeck2Score < 0)
-                    {
-                        var s = 0;
-                        Hands2.ForEach(x => { if (x.Item2 > s) s = x.Item2; });
-                        highestDeck2Score = s;
-                    }
-                    return highestDeck2Score;
+                    if (_highestDeck2Score >= 0)
+                        return _highestDeck2Score;
+                    var s = 0;
+                    Hands2.ForEach(x => { if (x.Item2 > s) s = x.Item2; });
+                    _highestDeck2Score = s;
+                    return _highestDeck2Score;
                 }
             }
-            public string HighestHand2() => Hands2.Where(x => x.Item2 == HighestDeck2Score).First().Item1;
+            public string HighestHand2() => Hands2.First(x => x.Item2 == HighestDeck2Score).Item1;
         }
-
         /// <summary>
         ///     For a cheating computer player in a poker game, creates a used deck with enough card for one player to make one swap.
         /// </summary>
@@ -67,39 +55,35 @@ namespace Winsoft.Gaming.GenericPokerFormationChecker
             var deckCount = secondHandQuality > 0 ? (int)(secondHandQuality / 8) : 0;
             var redealCount = secondHandQuality % 8;
             var structures = new List<NewDeckStructure>();
-            for (int i = 0; i < deckCount + 1; i++)
+            for (var i = 0; i < deckCount + 1; i++)
             {
                 var structure = new NewDeckStructure();
                 structure.Deck = new Deck();
                 structure.Deck.Shuffle();
                 structure.Hand1 = $"{structure.Deck.Pop()},{structure.Deck.Pop()},{structure.Deck.Pop()},{structure.Deck.Pop()},{structure.Deck.Pop()}";
                 var redeals = (i < deckCount ? 8 : redealCount + 1);
-                for (int j = 0; j < redeals; j++)
+                for (var j = 0; j < redeals; j++)
                 {
                     var hand2 = $"{structure.Deck.Pop()},{structure.Deck.Pop()},{structure.Deck.Pop()},{structure.Deck.Pop()},{structure.Deck.Pop()}";
                     var fc = new FormationChecker(hand2);
                     fc.CheckFormation();
-                    var hand2score = fc.Score;
-                    structure.Hands2.Add(Tuple.Create(hand2, hand2score));
+                    var hand2Score = fc.Score;
+                    structure.Hands2.Add(Tuple.Create(hand2, hand2Score));
                 }
                 structures.Add(structure);
             }
             structures.Sort((a, b) => (a.HighestDeck2Score > b.HighestDeck2Score ? 1 : (a.HighestDeck2Score < b.HighestDeck2Score ? -1 : 0)));
-            this.deck = structures.Last().Deck;
+            Deck = structures.Last().Deck;
             return Tuple.Create(structures.Last().Hand1, structures.Last().HighestHand2());
         }
-
-        public bool CanPopHand { get { return Count >= 5; } }
-
-        public int Count { get { CheckDeckCapacity(); return deck.Count; } }
-
+        public bool CanPopHand => Count >= 5;
+        public int Count { get { CheckDeckCapacity(); return Deck.Count; } }
         private void CheckDeckCapacity()
         {
-            if (deck == null || deck.Count <= 0)
-            {
-                deck = new Deck();
-                deck.Shuffle();
-            }
+            if (Deck != null && Deck.Count > 0)
+                return;
+            Deck = new Deck();
+            Deck.Shuffle();
         }
     }
 }

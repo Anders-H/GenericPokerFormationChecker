@@ -44,7 +44,7 @@
     <Compile Include="Card.cs" />
     <Compile Include="Deck.cs" />
     <Compile Include="DeckManager.cs" />
-    <Compile Include="Exceptions.cs" />
+    <Compile Include="Exceptions\Exceptions.cs" />
     <Compile Include="FormationChecker.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
