@@ -46,13 +46,13 @@ namespace Winsoft.Gaming.GenericPokerFormationChecker
             public string HighestHand2() => Hands2.First(x => x.Item2 == HighestDeck2Score).Item1;
         }
         /// <summary>
-        ///     For a cheating computer player in a poker game, creates a used deck with enough card for one player to make one swap.
+        ///     For a cheating computer player in a poker game, creates a used deck with enough cards left for one player to make one swap.
         /// </summary>
         /// <param name="secondHandQuality">Cheat level.</param>
         /// <returns></returns>
         public Tuple<string, string> PopHands(int secondHandQuality)
         {
-            var deckCount = secondHandQuality > 0 ? (int)(secondHandQuality / 8) : 0;
+            var deckCount = secondHandQuality > 0 ? secondHandQuality / 8 : 0;
             var redealCount = secondHandQuality % 8;
             var structures = new List<NewDeckStructure>();
             for (var i = 0; i < deckCount + 1; i++)
@@ -61,7 +61,7 @@ namespace Winsoft.Gaming.GenericPokerFormationChecker
                 structure.Deck = new Deck();
                 structure.Deck.Shuffle();
                 structure.Hand1 = $"{structure.Deck.Pop()},{structure.Deck.Pop()},{structure.Deck.Pop()},{structure.Deck.Pop()},{structure.Deck.Pop()}";
-                var redeals = (i < deckCount ? 8 : redealCount + 1);
+                var redeals = i < deckCount ? 8 : redealCount + 1;
                 for (var j = 0; j < redeals; j++)
                 {
                     var hand2 = $"{structure.Deck.Pop()},{structure.Deck.Pop()},{structure.Deck.Pop()},{structure.Deck.Pop()},{structure.Deck.Pop()}";
