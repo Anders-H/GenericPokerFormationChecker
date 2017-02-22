@@ -2,12 +2,7 @@
 
 namespace Winsoft.Gaming.GenericPokerFormationChecker
 {
-
-    internal enum Suit { Hearts, Diamonds, Clubs, Spades }
-    internal enum Color { Red, Black }
-    internal enum Value { _2 = 2, _3, _4, _5, _6, _7, _8, _9, _10, Knight, Queen, King, Ace }
-
-    internal class Card : IComparable<Card>
+    public class Card : IComparable<Card>
     {
         protected bool Equals(Card other) => Suit == other.Suit && Value == other.Value && InFormation == other.InFormation;
         public override bool Equals(object obj)
@@ -60,15 +55,15 @@ namespace Winsoft.Gaming.GenericPokerFormationChecker
             Value value;
             switch (valueString)
             {
-                case "02": case "2": value = Value._2; break;
-                case "03": case "3": value = Value._3; break;
-                case "04": case "4": value = Value._4; break;
-                case "05": case "5": value = Value._5; break;
-                case "06": case "6": value = Value._6; break;
-                case "07": case "7": value = Value._7; break;
-                case "08": case "8": value = Value._8; break;
-                case "09": case "9": value = Value._9; break;
-                case "10": value = Value._10; break;
+                case "02": case "2": value = Value.Value02; break;
+                case "03": case "3": value = Value.Value03; break;
+                case "04": case "4": value = Value.Value04; break;
+                case "05": case "5": value = Value.Value05; break;
+                case "06": case "6": value = Value.Value06; break;
+                case "07": case "7": value = Value.Value07; break;
+                case "08": case "8": value = Value.Value08; break;
+                case "09": case "9": value = Value.Value09; break;
+                case "10": value = Value.Value10; break;
                 case "KN": case "11": value = Value.Knight; break;
                 case "QU": case "12": value = Value.Queen; break;
                 case "KI": case "13": value = Value.King; break;
@@ -78,21 +73,21 @@ namespace Winsoft.Gaming.GenericPokerFormationChecker
             return new Card(suit, value);
         }
         public static Card Create(Suit suit, Value value) => new Card(suit, value);
-        public static Card Create(Suit suit, int twoBasedValue)
+        public static Card Create(Suit suit, int value)
         {
-            twoBasedValue = twoBasedValue == 1 ? 14 : twoBasedValue;
-            if (!(twoBasedValue >= 2 && twoBasedValue <= 14))
+            value = value == 1 ? 14 : value;
+            if (!(value >= 2 && value <= 14))
                 throw new Exception("Valid range: 2-14 or 1.");
-            return new Card(suit, (Value)twoBasedValue);
+            return new Card(suit, (Value)value);
         }
-        public static Card Create(int oneBasedSuit, int twoBasedValue)
+        public static Card Create(int oneBasedSuit, int value)
         {
-            twoBasedValue = twoBasedValue == 1 ? 14 : twoBasedValue;
-            if (!(twoBasedValue >= 2 && twoBasedValue <= 14))
+            value = value == 1 ? 14 : value;
+            if (!(value >= 2 && value <= 14))
                 throw new Exception("Valid value range: 2-14 or 1.");
             if (!(oneBasedSuit >= 1 && oneBasedSuit <= 4))
                 throw new Exception("Valid suit range: 1-4.");
-            return new Card((Suit)(oneBasedSuit - 1), (Value)twoBasedValue);
+            return new Card((Suit)(oneBasedSuit - 1), (Value)value);
         }
         public Color Color
         {

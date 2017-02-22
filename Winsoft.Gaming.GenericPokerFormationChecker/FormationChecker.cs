@@ -6,10 +6,6 @@ using Winsoft.Gaming.GenericPokerFormationChecker.Exceptions;
 
 namespace Winsoft.Gaming.GenericPokerFormationChecker
 {
-    internal enum Formation
-    {
-        Nothing, Pair, TwoPairs, ThreeOfAKind, Straight, Flush, FullHouse, FourOfAKind, StraightFlush, RoyalFlush
-    }
     public class FormationChecker
     {
         public FormationChecker(string hand)
@@ -129,57 +125,8 @@ namespace Winsoft.Gaming.GenericPokerFormationChecker
                 _cards[i + 1] = _cards[i];
             _cards[0] = temp;
         }
-        public override string ToString()
-        {
-            var s = new StringBuilder();
-            s.Append("FORMATION=");
-            switch (Formation)
-            {
-                case Formation.Pair:
-                    s.Append("PAIR");
-                    break;
-                case Formation.TwoPairs:
-                    s.Append("2-PAIRS");
-                    break;
-                case Formation.ThreeOfAKind:
-                    s.Append("3-OF-A-KIND");
-                    break;
-                case Formation.Straight:
-                    s.Append("STRAIGHT");
-                    break;
-                case Formation.Flush:
-                    s.Append("FLUSH");
-                    break;
-                case Formation.FullHouse:
-                    s.Append("FULL-HOUSE");
-                    break;
-                case Formation.FourOfAKind:
-                    s.Append("4-OF-A-KIND");
-                    break;
-                case Formation.StraightFlush:
-                    s.Append("STRAIGHT-FLUSH");
-                    break;
-                case Formation.RoyalFlush:
-                    s.Append("ROYAL-FLUSH");
-                    break;
-                case Formation.Nothing:
-                    s.Append("NOTHING");
-                    break;
-                default:
-                    throw new ArgumentOutOfRangeException();
-            }
-            s.Append(",SCORE=");
-            s.Append(Score.ToString("0000"));
-            s.Append(",HAND=");
-            for (var i = 0; i < 5; i++)
-            {
-                s.Append(_cards[i] == null ? "NONE" : _cards[i].ToString());
-                if (!(_cards[i] == null) && _cards[i].InFormation)
-                    s.Append("*");
-                s.Append(i < 4 ? "-" : "");
-            }
-            return s.ToString();
-        }
+        public FormationDescription GetFormationDescription() => new FormationDescription(Formation, _cards, Score);
+        public override string ToString() => GetFormationDescription().ToString();
         public bool CheckFormation()
         {
             if (Count < 5)
@@ -197,10 +144,10 @@ namespace Winsoft.Gaming.GenericPokerFormationChecker
                            _cards[4].Score == _cards[3].Score + 1)
                            ||
                            (_cards[4].Value == Value.Ace &&
-                           _cards[0].Value == Value._2 &&
-                           _cards[1].Value == Value._3 &&
-                           _cards[2].Value == Value._4 &&
-                           _cards[3].Value == Value._5);
+                           _cards[0].Value == Value.Value02 &&
+                           _cards[1].Value == Value.Value03 &&
+                           _cards[2].Value == Value.Value04 &&
+                           _cards[3].Value == Value.Value05);
 
             //Precheck: Flush
             var suit = _cards[0].Suit;
@@ -208,8 +155,8 @@ namespace Winsoft.Gaming.GenericPokerFormationChecker
 
             //In a straight/flush/straight flush: All cards are in formation.
             if (isStraight || isFlush)
-                for (int i = 0; i < _cards.Length; i++)
-                    _cards[i].InFormation = true;
+                foreach (var t in _cards)
+                    t.InFormation = true;
 
             //Check value representation counts for pairs and so on.
             var valueRepresentations = new int[5];
@@ -217,7 +164,7 @@ namespace Winsoft.Gaming.GenericPokerFormationChecker
                 valueRepresentations[i] = CountValue(_cards[i].Value);
 
             //In a wheel straight, swap first and last to make the ace first.
-            if (isStraight && _cards[0].Value == Value._2 && _cards[4].Value == Value.Ace)
+            if (isStraight && _cards[0].Value == Value.Value02 && _cards[4].Value == Value.Ace)
                 ShiftRight();
 
             //Precheck pair count.
@@ -229,7 +176,7 @@ namespace Winsoft.Gaming.GenericPokerFormationChecker
             var onePair = doubleCount == 2;
 
             //Check royal flush.
-            if (isStraight && _cards[0].Value == Value._10 && isFlush)
+            if (isStraight && _cards[0].Value == Value.Value10 && isFlush)
             {
                 Formation = Formation.RoyalFlush;
                 return true;
