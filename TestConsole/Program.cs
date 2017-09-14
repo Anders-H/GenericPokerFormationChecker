@@ -1,6 +1,7 @@
 ﻿using System;
 using Winsoft.Gaming.GenericPokerFormationChecker;
 using static System.String;
+using static System.StringComparison;
 
 namespace TestConsole
 {
@@ -21,14 +22,14 @@ namespace TestConsole
                     return;
 
                 //Does user want to test the deck?
-                if (Compare(hand, "test_deck", StringComparison.OrdinalIgnoreCase) == 0)
+                if (Compare(hand, "test_deck", OrdinalIgnoreCase) == 0)
                 {
                     TestDeck();
                     continue;
                 }
 
                 //Does user want to test the deck manager?
-                if (Compare(hand, "test_deck_manager", StringComparison.OrdinalIgnoreCase) == 0)
+                if (Compare(hand, "test_deck_manager", OrdinalIgnoreCase) == 0)
                 {
                     TestDeckManager();
                     continue;

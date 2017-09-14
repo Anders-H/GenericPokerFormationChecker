@@ -70,12 +70,7 @@ namespace Winsoft.Gaming.GenericPokerFormationChecker
                 _cards[i] = card;
             return i;
         }
-
-        internal void PutCard(Card card, int index)
-        {
-            _cards[index] = card;
-        }
-
+        internal void PutCard(Card card, int index) => _cards[index] = card;
         internal Card PeekCard(int index) => _cards[index];
         internal Card PopCard(int index)
         {
