@@ -73,13 +73,13 @@ namespace TestConsole
             var hands = dm.PopHands(hand2Quality);
             Console.ForegroundColor = ConsoleColor.Blue;
             Console.WriteLine("Hand 1:");
-            var f = new FormationChecker(hands.Item1);
+            var f = new FormationChecker(hands.hand1);
             f.CheckFormation();
             Console.ForegroundColor = ConsoleColor.Cyan;
             Console.WriteLine(f.ToString());
             Console.ForegroundColor = ConsoleColor.Blue;
             Console.WriteLine($"Hand 2 (quality {hand2Quality}):");
-            f = new FormationChecker(hands.Item2);
+            f = new FormationChecker(hands.hand2);
             f.CheckFormation();
             Console.ForegroundColor = ConsoleColor.Cyan;
             Console.WriteLine(f.ToString());

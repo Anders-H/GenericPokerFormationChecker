@@ -36,11 +36,11 @@ namespace Winsoft.Gaming.GenericPokerFormationChecker
                 catch (ParseCardFailedException ex)
                 {
                     var message = ex.Message;
-                    throw new ParseCardFailedException($"Failed to parse card {(i + 1)}/5: {message}");
+                    throw new ParseCardFailedException($"Failed to parse card {i + 1}/5: {message}");
                 }
                 catch
                 {
-                    throw new ParseHandFailedException($"Failed to parse card {(i + 1)}/5.");
+                    throw new ParseHandFailedException($"Failed to parse card {i + 1}/5.");
                 }
             }
         }
@@ -238,7 +238,7 @@ namespace Winsoft.Gaming.GenericPokerFormationChecker
             if (twoPairs)
             {
                 Formation = Formation.TwoPairs;
-                for (int i = 0; i < 5; i++)
+                for (var i = 0; i < 5; i++)
                     _cards[i].InFormation = valueRepresentations[i] == 2;
                 return true;
             }
@@ -246,7 +246,7 @@ namespace Winsoft.Gaming.GenericPokerFormationChecker
             if (onePair)
             {
                 Formation = Formation.Pair;
-                for (int i = 0; i < 5; i++)
+                for (var i = 0; i < 5; i++)
                     _cards[i].InFormation = valueRepresentations[i] == 2;
                 return true;
             }
