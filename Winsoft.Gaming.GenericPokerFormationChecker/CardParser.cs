@@ -1,5 +1,4 @@
-﻿
-namespace Winsoft.Gaming.GenericPokerFormationChecker
+﻿namespace Winsoft.Gaming.GenericPokerFormationChecker
 {
     internal class CardParser
     {

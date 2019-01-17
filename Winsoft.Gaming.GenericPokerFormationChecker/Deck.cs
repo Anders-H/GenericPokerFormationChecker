@@ -7,12 +7,15 @@ namespace Winsoft.Gaming.GenericPokerFormationChecker
     {
         private List<Card> Cards { get; } = new List<Card>();
         private static Random Rnd { get; } = new Random();
+        public int Count => Cards.Count;
+
         public Deck()
         {
             for (var i = 1; i < 5; i++)
                 for (var j = 2; j < 15; j++)
                     Cards.Add(Card.Create(i, j));
         }
+
         public void Shuffle()
         {
             var newDeck = new List<Card>();
@@ -25,6 +28,7 @@ namespace Winsoft.Gaming.GenericPokerFormationChecker
             }
             Cards.AddRange(newDeck);
         }
+
         public string Pop()
         {
             if (Count <= 0)
@@ -33,7 +37,8 @@ namespace Winsoft.Gaming.GenericPokerFormationChecker
             Cards.RemoveAt(0);
             return ret.ToString();
         }
-        public string Peek() => Count > 0 ? Cards[0].ToString() : "";
-        public int Count => Cards.Count;
+
+        public string Peek() =>
+            Count > 0 ? Cards[0].ToString() : "";
     }
 }

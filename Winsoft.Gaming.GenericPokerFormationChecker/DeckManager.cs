@@ -9,11 +9,23 @@ namespace Winsoft.Gaming.GenericPokerFormationChecker
     public class DeckManager
     {
         private Deck Deck { get; set; }
+        public bool CanPopHand => Count >= 5;
+
+        public int Count
+        {
+            get
+            {
+                CheckDeckCapacity();
+                return Deck.Count;
+            }
+        }
+
         public string Pop()
         {
             CheckDeckCapacity();
             return Deck.Pop();
         }
+
         public string PopHand()
         {
             if (!CanPopHand)
@@ -24,12 +36,14 @@ namespace Winsoft.Gaming.GenericPokerFormationChecker
             string[] cards = { Pop(), Pop(), Pop(), Pop(), Pop() };
             return string.Join(", ", cards);
         }
+
         private class NewDeckStructure
         {
             private int _highestDeck2Score = -1;
             internal string Hand1 { get; set; }
             internal List<(string hand, int score)> Hands2 { get; } = new List<(string, int)>();
             internal Deck Deck { get; set; }
+
             internal int HighestDeck2Score
             {
                 get
@@ -42,8 +56,11 @@ namespace Winsoft.Gaming.GenericPokerFormationChecker
                     return _highestDeck2Score;
                 }
             }
-            public string HighestHand2() => Hands2.First(x => x.score == HighestDeck2Score).hand;
+
+            public string HighestHand2() =>
+                Hands2.First(x => x.score == HighestDeck2Score).hand;
         }
+
         /// <summary>
         ///     For a cheating computer player in a poker game, creates a used deck with enough cards left for one player to make one swap.
         /// </summary>
@@ -75,8 +92,7 @@ namespace Winsoft.Gaming.GenericPokerFormationChecker
             Deck = structures.Last().Deck;
             return (hand1: structures.Last().Hand1, hand2: structures.Last().HighestHand2());
         }
-        public bool CanPopHand => Count >= 5;
-        public int Count { get { CheckDeckCapacity(); return Deck.Count; } }
+
         private void CheckDeckCapacity()
         {
             if (Deck != null && Deck.Count > 0)

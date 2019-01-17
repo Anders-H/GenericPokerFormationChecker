@@ -7,6 +7,22 @@ namespace Winsoft.Gaming.GenericPokerFormationChecker
 {
     public class FormationChecker
     {
+        private readonly Card[] _cards;
+        internal Formation Formation { get; set; }
+        internal int Count => _cards.Count(t => !(t == null));
+
+        internal int Score
+        {
+            get
+            {
+                var ret = 0;
+                for (var i = 0; i < 5; i++)
+                    if (!(_cards[i] == null) && _cards[i].InFormation)
+                        ret += _cards[i].Score;
+                return ret + (int)Formation * 100;
+            }
+        }
+
         public FormationChecker(string hand)
         {
             _cards = new Card[5];
@@ -44,25 +60,13 @@ namespace Winsoft.Gaming.GenericPokerFormationChecker
                 }
             }
         }
-        private readonly Card[] _cards;
-        internal Formation Formation { get; set; }
-        internal int Score
-        {
-            get
-            {
-                var ret = 0;
-                for (var i = 0; i < 5; i++)
-                    if (!(_cards[i] == null) && _cards[i].InFormation)
-                        ret += _cards[i].Score;
-                return ret + (int) Formation * 100;
-            }
-        }
+
         internal void Clear()
         {
             for (var i = 0; i < _cards.Length; i++)
                 _cards[i] = null;
         }
-        internal int Count => _cards.Count(t => !(t == null));
+        
         internal int PutCard(Card card)
         {
             var i = GetFirstFreeIndex();
@@ -70,15 +74,22 @@ namespace Winsoft.Gaming.GenericPokerFormationChecker
                 _cards[i] = card;
             return i;
         }
-        internal void PutCard(Card card, int index) => _cards[index] = card;
-        internal Card PeekCard(int index) => _cards[index];
+
+        internal void PutCard(Card card, int index) =>
+            _cards[index] = card;
+        internal Card PeekCard(int index) =>
+            _cards[index];
+
         internal Card PopCard(int index)
         {
             var ret = _cards[index];
             _cards[index] = null;
             return ret;
         }
-        internal List<Card> PeekCards() => _cards.Where(t => !(t == null)).ToList();
+
+        internal List<Card> PeekCards() =>
+            _cards.Where(t => !(t == null)).ToList();
+
         internal List<Card> PopCards()
         {
             var ret = new List<Card>();
@@ -90,15 +101,21 @@ namespace Winsoft.Gaming.GenericPokerFormationChecker
             }
             return ret;
         }
+
         internal int GetFirstFreeIndex()
         {
-            for (int i = 0; i < _cards.Length; i++)
+            for (var i = 0; i < _cards.Length; i++)
                 if (_cards[i] == null)
                     return i;
             return -1;
         }
-        internal int CountSuit(Suit suit) => _cards.Count(x => x.Suit == suit);
-        internal int CountValue(Value value) => _cards.Count(x => x.Value == value);
+
+        internal int CountSuit(Suit suit) =>
+            _cards.Count(x => x.Suit == suit);
+
+        internal int CountValue(Value value) =>
+            _cards.Count(x => x.Value == value);
+
         internal bool Sort()
         {
             if (Count < 5)
@@ -106,12 +123,14 @@ namespace Winsoft.Gaming.GenericPokerFormationChecker
             Array.Sort(_cards);
             return true;
         }
+
         internal void Swap(int index1, int index2)
         {
             var temp = _cards[index1];
             _cards[index1] = _cards[index2];
             _cards[index2] = temp;
         }
+
         internal void ShiftRight()
         {
             var temp = _cards[4];
@@ -119,8 +138,13 @@ namespace Winsoft.Gaming.GenericPokerFormationChecker
                 _cards[i + 1] = _cards[i];
             _cards[0] = temp;
         }
-        public FormationDescription GetFormationDescription() => new FormationDescription(Formation, _cards, Score);
-        public override string ToString() => GetFormationDescription().ToString();
+
+        public FormationDescription GetFormationDescription() =>
+            new FormationDescription(Formation, _cards, Score);
+
+        public override string ToString() =>
+            GetFormationDescription().ToString();
+
         public bool CheckFormation()
         {
             if (Count < 5)
@@ -217,15 +241,21 @@ namespace Winsoft.Gaming.GenericPokerFormationChecker
                 Formation = Formation.ThreeOfAKind;
                 if (valueRepresentations[0] == 3)
                 {
-                    _cards[0].InFormation = true; _cards[1].InFormation = true; _cards[2].InFormation = true;
+                    _cards[0].InFormation = true;
+                    _cards[1].InFormation = true;
+                    _cards[2].InFormation = true;
                 }
                 else if (valueRepresentations[4] == 3)
                 {
-                    _cards[2].InFormation = true; _cards[3].InFormation = true; _cards[4].InFormation = true;
+                    _cards[2].InFormation = true;
+                    _cards[3].InFormation = true;
+                    _cards[4].InFormation = true;
                 }
                 else
                 {
-                    _cards[1].InFormation = true; _cards[2].InFormation = true; _cards[3].InFormation = true;
+                    _cards[1].InFormation = true;
+                    _cards[2].InFormation = true;
+                    _cards[3].InFormation = true;
                 }
                 return true;
             }

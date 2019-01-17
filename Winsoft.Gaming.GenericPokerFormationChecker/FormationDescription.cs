@@ -6,6 +6,10 @@ namespace Winsoft.Gaming.GenericPokerFormationChecker
 {
     public class FormationDescription
     {
+        public Formation Formation { get; }
+        public List<Card> Cards { get; }
+        public int Score { get; }
+
         internal FormationDescription(Formation formation, IEnumerable<Card> cards, int score)
         {
             Formation = formation;
@@ -13,9 +17,7 @@ namespace Winsoft.Gaming.GenericPokerFormationChecker
             Cards.AddRange(cards);
             Score = score;
         }
-        public Formation Formation { get; }
-        public List<Card> Cards { get; }
-        public int Score { get; }
+
         public override string ToString()
         {
             var s = new StringBuilder();
