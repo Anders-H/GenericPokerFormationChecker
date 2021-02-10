@@ -74,16 +74,16 @@ namespace TestConsole
         {
             var dm = new DeckManager();
             var hand2Quality = Rnd.Next(100);
-            var (hand1, hand2) = dm.PopHands(hand2Quality);
+            var hands = dm.PopHands(hand2Quality);
             Console.ForegroundColor = ConsoleColor.Blue;
             Console.WriteLine("Hand 1:");
-            var f = new FormationChecker(hand1);
+            var f = new FormationChecker(hands.Hand1);
             f.CheckFormation();
             Console.ForegroundColor = ConsoleColor.Cyan;
             Console.WriteLine(f.ToString());
             Console.ForegroundColor = ConsoleColor.Blue;
             Console.WriteLine($"Hand 2 (quality {hand2Quality}):");
-            f = new FormationChecker(hand2);
+            f = new FormationChecker(hands.Hand2);
             f.CheckFormation();
             Console.ForegroundColor = ConsoleColor.Cyan;
             Console.WriteLine(f.ToString());

@@ -1,16 +1,25 @@
 ﻿using System;
-using System.Collections.Generic;
 
 namespace Winsoft.Gaming.GenericPokerFormationChecker
 {
     public class Deck
     {
-        private List<Card> Cards { get; } = new List<Card>();
-        private static Random Rnd { get; } = new Random();
-        public int Count => Cards.Count;
+        private CardList Cards { get; }
+
+        private static Random Rnd { get; }
+        
+        public int Count =>
+            Cards.Count;
+
+        static Deck()
+        {
+            Rnd = new Random();
+        }
 
         public Deck()
         {
+            Cards = new CardList();
+
             for (var i = 1; i < 5; i++)
                 for (var j = 2; j < 15; j++)
                     Cards.Add(Card.Create(i, j));
@@ -18,7 +27,7 @@ namespace Winsoft.Gaming.GenericPokerFormationChecker
 
         public void Shuffle()
         {
-            var newDeck = new List<Card>();
+            var newDeck = new CardList();
             while (Count > 0)
             {
                 var index = Rnd.Next(Count);

@@ -9,11 +9,7 @@ A class that can identify poker hands, for .NET 5.0.
 
 ```C#
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Winsoft.Gaming.GenericPokerFormationChecker; //The FormationChecker class.
+using Winsoft.Gaming.GenericPokerFormationChecker;
 
 namespace ConsoleApplication1
 {

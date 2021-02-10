@@ -7,13 +7,15 @@ namespace Winsoft.Gaming.GenericPokerFormationChecker
     public class FormationDescription
     {
         public Formation Formation { get; }
-        public List<Card> Cards { get; }
+
+        public CardList Cards { get; }
+
         public int Score { get; }
 
         internal FormationDescription(Formation formation, IEnumerable<Card> cards, int score)
         {
             Formation = formation;
-            Cards = new List<Card>();
+            Cards = new CardList();
             Cards.AddRange(cards);
             Score = score;
         }
@@ -22,6 +24,7 @@ namespace Winsoft.Gaming.GenericPokerFormationChecker
         {
             var s = new StringBuilder();
             s.Append("FORMATION=");
+
             switch (Formation)
             {
                 case Formation.Pair:
@@ -57,19 +60,26 @@ namespace Winsoft.Gaming.GenericPokerFormationChecker
                 default:
                     throw new ArgumentOutOfRangeException();
             }
+
             s.Append(",SCORE=");
             s.Append(Score.ToString("0000"));
             s.Append(",HAND=");
+
             if (Cards.Count > 0)
                 for (var i = 0; i < Cards.Count; i++)
                 {
-                    s.Append(Cards[i] == null ? "NONE" : Cards[i].ToString());
+                    s.Append(Cards[i] == null
+                        ? "NONE"
+                        : Cards[i].ToString());
+
                     if (!(Cards[i] == null) && Cards[i].InFormation)
-                        s.Append("*");
+                        s.Append('*');
+                    
                     s.Append(i < Cards.Count - 1 ? "-" : "");
                 }
             else
                 s.Append("NONE");
+
             return s.ToString();
         }
     }

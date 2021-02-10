@@ -1,15 +1,20 @@
 ﻿using System;
-using System.Dynamic;
 
 namespace Winsoft.Gaming.GenericPokerFormationChecker
 {
     public class Card : IComparable<Card>
     {
-        internal int SortScore => Score * 100 + (int)Suit;
+        internal int SortScore =>
+            Score * 100 + (int)Suit;
+
         public Suit Suit { get; }
+
         public Value Value { get; }
+
         public bool InFormation { get; internal set; } = false;
-        public int Score => (int)Value;
+
+        public int Score =>
+            (int)Value;
 
         public Card(Suit suit, Value value)
         {
@@ -93,23 +98,42 @@ namespace Winsoft.Gaming.GenericPokerFormationChecker
             var s = new System.Text.StringBuilder();
             switch (Suit)
             {
-                case Suit.Hearts: s.Append("HRT"); break;
-                case Suit.Diamonds: s.Append("DMN"); break;
-                case Suit.Clubs: s.Append("CLB"); break;
-                case Suit.Spades: s.Append("SPD"); break;
-                default: throw new ArgumentOutOfRangeException();
+                case Suit.Hearts:
+                    s.Append("HRT");
+                    break;
+                case Suit.Diamonds:
+                    s.Append("DMN");
+                    break;
+                case Suit.Clubs:
+                    s.Append("CLB");
+                    break;
+                case Suit.Spades:
+                    s.Append("SPD");
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException();
             }
+
             if (Score <= 10)
                 s.Append(Score.ToString("00"));
             else
             {
                 switch (Score)
                 {
-                    case 11: s.Append("KN"); break;
-                    case 12: s.Append("QU"); break;
-                    case 13: s.Append("KI"); break;
-                    case 14: s.Append("AC"); break;
-                    default: throw new ArgumentOutOfRangeException();
+                    case 11:
+                        s.Append("KN");
+                        break;
+                    case 12:
+                        s.Append("QU");
+                        break;
+                    case 13:
+                        s.Append("KI");
+                        break;
+                    case 14:
+                        s.Append("AC");
+                        break;
+                    default:
+                        throw new ArgumentOutOfRangeException();
                 }
             }
             return s.ToString();

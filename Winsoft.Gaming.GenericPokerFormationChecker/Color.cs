@@ -2,6 +2,7 @@
 {
     public enum Color
     {
-        Red, Black
+        Red,
+        Black
     }
 }
