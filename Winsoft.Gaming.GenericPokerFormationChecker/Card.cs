@@ -1,10 +1,12 @@
 ﻿using System;
+using System.ComponentModel;
 
 namespace Winsoft.Gaming.GenericPokerFormationChecker
 {
     public class Card : IComparable<Card>
     {
-        internal int SortScore =>
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public int SortScore =>
             Score * 100 + (int)Suit;
 
         public Suit Suit { get; }
@@ -64,6 +66,7 @@ namespace Winsoft.Gaming.GenericPokerFormationChecker
             {
                 var hashCode = (int)Suit;
                 hashCode = (hashCode * 397) ^ (int)Value;
+                // ReSharper disable once NonReadonlyMemberInGetHashCode
                 hashCode = (hashCode * 397) ^ InFormation.GetHashCode();
                 return hashCode;
             }
