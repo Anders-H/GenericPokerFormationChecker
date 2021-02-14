@@ -89,7 +89,7 @@ namespace Winsoft.Gaming.GenericPokerFormationChecker
             structures.Sort(
                 (a, b) => a.HighestDeck2Score > b.HighestDeck2Score
                     ? 1
-                    : (a.HighestDeck2Score < b.HighestDeck2Score ? -1 : 0)
+                    : a.HighestDeck2Score < b.HighestDeck2Score ? -1 : 0
             );
             
             Deck = structures.Last().Deck;
@@ -106,7 +106,6 @@ namespace Winsoft.Gaming.GenericPokerFormationChecker
                 return;
 
             Deck = new Deck();
-
             Deck.Shuffle();
         }
     }
