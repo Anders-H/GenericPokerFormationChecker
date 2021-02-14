@@ -307,5 +307,12 @@ namespace Winsoft.Gaming.GenericPokerFormationChecker
             _cards[4]!.InFormation = true;
             return true;
         }
+
+        public bool CheckFormation(out int score)
+        {
+            var result = CheckFormation();
+            score = Score;
+            return result;
+        }
     }
 }
