@@ -51,7 +51,7 @@ namespace Winsoft.Gaming.GenericPokerFormationChecker
         public static Card Create(string card) =>
             CardParser.Parse(card);
 
-        public override bool Equals(object obj)
+        public override bool Equals(object? obj)
         {
             if (ReferenceEquals(null, obj))
                 return false;
@@ -93,8 +93,8 @@ namespace Winsoft.Gaming.GenericPokerFormationChecker
             }
         }
 
-        public int CompareTo(Card other) =>
-            SortScore == other.SortScore ? 0 : SortScore > other.SortScore ? 1 : -1;
+        public int CompareTo(Card? other) =>
+            SortScore == (other?.SortScore ?? 0) ? 0 : SortScore > (other?.SortScore ?? 0) ? 1 : -1;
 
         public override string ToString()
         {
@@ -142,7 +142,7 @@ namespace Winsoft.Gaming.GenericPokerFormationChecker
             return s.ToString();
         }
 
-        public static bool operator ==(Card a, Card b) =>
+        public static bool operator ==(Card? a, Card? b) =>
             a?.Suit == b?.Suit && a?.Value == b?.Value;
 
         public static bool operator !=(Card a, Card b) =>

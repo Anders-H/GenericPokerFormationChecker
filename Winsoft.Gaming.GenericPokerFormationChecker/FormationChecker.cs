@@ -6,7 +6,7 @@ namespace Winsoft.Gaming.GenericPokerFormationChecker
 {
     public class FormationChecker
     {
-        private readonly Card[] _cards;
+        private readonly Card?[] _cards;
         
         internal Formation Formation { get; set; }
         
@@ -19,15 +19,15 @@ namespace Winsoft.Gaming.GenericPokerFormationChecker
             {
                 var ret = 0;
                 for (var i = 0; i < 5; i++)
-                    if (!(_cards[i] == null) && _cards[i].InFormation)
-                        ret += _cards[i].Score;
+                    if (_cards[i]?.InFormation ?? false)
+                        ret += _cards[i]!.Score;
                 return ret + (int)Formation * 100;
             }
         }
 
         public FormationChecker(string hand)
         {
-            _cards = new Card[5];
+            _cards = new Card?[5];
             Formation = Formation.Nothing;
 
             if (hand.IndexOf(',') < 0)
@@ -84,30 +84,30 @@ namespace Winsoft.Gaming.GenericPokerFormationChecker
         internal void PutCard(Card card, int index) =>
             _cards[index] = card;
 
-        internal Card PeekCard(int index) =>
+        internal Card? PeekCard(int index) =>
             _cards[index];
 
-        internal Card PopCard(int index)
+        internal Card? PopCard(int index)
         {
             var ret = _cards[index];
             _cards[index] = null;
             return ret;
         }
 
-        internal CardList PeekCards() =>
-            new CardList(
-                _cards
-                    .Where(t => !(t == null))
-                    .ToList()
-            );
+        internal CardList PeekCards()
+        {
+            var cardList = new CardList();
+            cardList.AddRange(_cards.Where(c => c != null)); // False warnings from compiler - _cards is an array of nullable cards.
+            return cardList;
+        }
 
         internal CardList PopCards()
         {
             var ret = new CardList();
             for (var i = 0; i < _cards.Length; i++)
             {
-                if (!(_cards[i] == null))
-                    ret.Add(_cards[i]);
+                if (_cards[i] != null) // False warnings from compiler - _cards is an array of nullable cards.
+                    ret.Add(_cards[i]!);
                 _cards[i] = null;
             }
             return ret;
@@ -122,10 +122,10 @@ namespace Winsoft.Gaming.GenericPokerFormationChecker
         }
 
         internal int CountSuit(Suit suit) =>
-            _cards.Count(x => x.Suit == suit);
+            _cards.Count(x => x != null && x.Suit == suit); // False warnings from compiler - _cards is an array of nullable cards.
 
         internal int CountValue(Value value) =>
-            _cards.Count(x => x.Value == value);
+            _cards.Count(x => x != null && x.Value == value); // False warnings from compiler - _cards is an array of nullable cards.
 
         internal bool Sort()
         {
@@ -151,7 +151,7 @@ namespace Winsoft.Gaming.GenericPokerFormationChecker
         }
 
         public FormationDescription GetFormationDescription() =>
-            new FormationDescription(Formation, _cards, Score);
+            new FormationDescription(Formation, _cards!, Score);
 
         public override string ToString() =>
             GetFormationDescription().ToString();
@@ -166,37 +166,41 @@ namespace Winsoft.Gaming.GenericPokerFormationChecker
             //Clear formation.
             Formation = Formation.Nothing;
             foreach (var t in _cards)
-                if (!(t == null))
-                    t.InFormation = false;
+            {
+                if (t == null)
+                    return false;
 
+                t.InFormation = false;
+            }
+            
             //Precheck: Straight.
-            var isStraight = (_cards[1].Score == _cards[0].Score + 1 &&
-                _cards[2].Score == _cards[1].Score + 1 &&
-                _cards[3].Score == _cards[2].Score + 1 &&
-                _cards[4].Score == _cards[3].Score + 1)
+            var isStraight = (_cards[1]!.Score == _cards[0]!.Score + 1 &&
+                _cards[2]!.Score == _cards[1]!.Score + 1 &&
+                _cards[3]!.Score == _cards[2]!.Score + 1 &&
+                _cards[4]!.Score == _cards[3]!.Score + 1)
                 ||
-                (_cards[4].Value == Value.Ace &&
-                _cards[0].Value == Value.Value02 &&
-                _cards[1].Value == Value.Value03 &&
-                _cards[2].Value == Value.Value04 &&
-                _cards[3].Value == Value.Value05);
+                (_cards[4]!.Value == Value.Ace &&
+                _cards[0]!.Value == Value.Value02 &&
+                _cards[1]!.Value == Value.Value03 &&
+                _cards[2]!.Value == Value.Value04 &&
+                _cards[3]!.Value == Value.Value05);
 
             //Precheck: Flush
-            var suit = _cards[0].Suit;
+            var suit = _cards[0]!.Suit;
             var isFlush = CountSuit(suit) == 5;
 
             //In a straight/flush/straight flush: All cards are in formation.
             if (isStraight || isFlush)
                 foreach (var t in _cards)
-                    t.InFormation = true;
+                    t!.InFormation = true;
 
             //Check value representation counts for pairs and so on.
             var valueRepresentations = new int[5];
             for (var i = 0; i < 5; i++)
-                valueRepresentations[i] = CountValue(_cards[i].Value);
+                valueRepresentations[i] = CountValue(_cards[i]!.Value);
 
             //In a wheel straight, swap first and last to make the ace first.
-            if (isStraight && _cards[0].Value == Value.Value02 && _cards[4].Value == Value.Ace)
+            if (isStraight && _cards[0]!.Value == Value.Value02 && _cards[4]!.Value == Value.Ace)
                 ShiftRight();
 
             //Precheck pair count.
@@ -208,7 +212,7 @@ namespace Winsoft.Gaming.GenericPokerFormationChecker
             var onePair = doubleCount == 2;
 
             //Check royal flush.
-            if (isStraight && _cards[0].Value == Value.Value10 && isFlush)
+            if (isStraight && _cards[0]!.Value == Value.Value10 && isFlush)
             {
                 Formation = Formation.RoyalFlush;
                 return true;
@@ -226,10 +230,10 @@ namespace Winsoft.Gaming.GenericPokerFormationChecker
             {
                 Formation = Formation.FourOfAKind;
 
-                var value = valueRepresentations[0] == 4 ? _cards[0].Value : _cards[1].Value;
+                var value = valueRepresentations[0] == 4 ? _cards[0]!.Value : _cards[1]!.Value;
                 
                 for (var i = 0; i < 5; i++)
-                    _cards[i].InFormation = _cards[i].Value == value;
+                    _cards[i]!.InFormation = _cards[i]!.Value == value;
                 
                 return true;
             }
@@ -239,7 +243,7 @@ namespace Winsoft.Gaming.GenericPokerFormationChecker
             {
                 Formation = Formation.FullHouse;
                 foreach (var t in _cards)
-                    t.InFormation = true;
+                    t!.InFormation = true;
                 return true;
             }
 
@@ -263,21 +267,21 @@ namespace Winsoft.Gaming.GenericPokerFormationChecker
                 Formation = Formation.ThreeOfAKind;
                 if (valueRepresentations[0] == 3)
                 {
-                    _cards[0].InFormation = true;
-                    _cards[1].InFormation = true;
-                    _cards[2].InFormation = true;
+                    _cards[0]!.InFormation = true;
+                    _cards[1]!.InFormation = true;
+                    _cards[2]!.InFormation = true;
                 }
                 else if (valueRepresentations[4] == 3)
                 {
-                    _cards[2].InFormation = true;
-                    _cards[3].InFormation = true;
-                    _cards[4].InFormation = true;
+                    _cards[2]!.InFormation = true;
+                    _cards[3]!.InFormation = true;
+                    _cards[4]!.InFormation = true;
                 }
                 else
                 {
-                    _cards[1].InFormation = true;
-                    _cards[2].InFormation = true;
-                    _cards[3].InFormation = true;
+                    _cards[1]!.InFormation = true;
+                    _cards[2]!.InFormation = true;
+                    _cards[3]!.InFormation = true;
                 }
                 return true;
             }
@@ -287,7 +291,7 @@ namespace Winsoft.Gaming.GenericPokerFormationChecker
             {
                 Formation = Formation.TwoPairs;
                 for (var i = 0; i < 5; i++)
-                    _cards[i].InFormation = valueRepresentations[i] == 2;
+                    _cards[i]!.InFormation = valueRepresentations[i] == 2;
                 return true;
             }
 
@@ -296,11 +300,11 @@ namespace Winsoft.Gaming.GenericPokerFormationChecker
             {
                 Formation = Formation.Pair;
                 for (var i = 0; i < 5; i++)
-                    _cards[i].InFormation = valueRepresentations[i] == 2;
+                    _cards[i]!.InFormation = valueRepresentations[i] == 2;
                 return true;
             }
             Formation = Formation.Nothing;
-            _cards[4].InFormation = true;
+            _cards[4]!.InFormation = true;
             return true;
         }
     }

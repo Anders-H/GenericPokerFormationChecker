@@ -85,7 +85,7 @@ namespace GenericPokerFormationCheckerTests
         [Fact]
         public void CantParceUnparcable()
         {
-            Assert.Throws<ParseCardFailedException>(() => Card.Parse(null));
+            Assert.Throws<ParseCardFailedException>(() => Card.Parse(null!));
             Assert.Throws<ParseCardFailedException>(() => Card.Parse(""));
             Assert.Throws<ParseCardFailedException>(() => Card.Parse("Sven Hedin"));
         }

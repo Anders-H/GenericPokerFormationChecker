@@ -6,11 +6,11 @@ namespace Winsoft.Gaming.GenericPokerFormationChecker.Internal
     {
         private int _highestDeck2Score = -1;
 
-        internal string Hand1 { get; set; }
+        internal string? Hand1 { get; set; }
         
         internal HandScorePairList Hands2 { get; }
         
-        internal Deck Deck { get; set; }
+        internal Deck? Deck { get; set; }
 
         internal NewDeckStructure()
         {

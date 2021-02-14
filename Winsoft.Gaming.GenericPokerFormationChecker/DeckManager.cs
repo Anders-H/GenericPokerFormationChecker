@@ -9,7 +9,7 @@ namespace Winsoft.Gaming.GenericPokerFormationChecker
     /// </summary>
     public class DeckManager
     {
-        private Deck Deck { get; set; }
+        private Deck? Deck { get; set; }
 
         public bool CanPopHand =>
             Count >= 5;
@@ -19,14 +19,14 @@ namespace Winsoft.Gaming.GenericPokerFormationChecker
             get
             {
                 CheckDeckCapacity();
-                return Deck.Count;
+                return Deck?.Count ?? 0;
             }
         }
 
         public string Pop()
         {
             CheckDeckCapacity();
-            return Deck.Pop();
+            return Deck?.PopString() ?? "";
         }
 
         public string PopHand()
@@ -65,12 +65,13 @@ namespace Winsoft.Gaming.GenericPokerFormationChecker
                     Deck = new Deck()
                 };
 
+                var d = structure.Deck;
                 structure.Deck.Shuffle();
-                structure.Hand1 = $"{structure.Deck.Pop()},{structure.Deck.Pop()},{structure.Deck.Pop()},{structure.Deck.Pop()},{structure.Deck.Pop()}";
+                structure.Hand1 = $"{d.PopString()},{d.PopString()},{d.PopString()},{d.PopString()},{d.PopString()}";
                 var redeals = i < deckCount ? 8 : redealCount + 1;
                 for (var j = 0; j < redeals; j++)
                 {
-                    var hand2 = $"{structure.Deck.Pop()},{structure.Deck.Pop()},{structure.Deck.Pop()},{structure.Deck.Pop()},{structure.Deck.Pop()}";
+                    var hand2 = $"{d.PopString()},{d.PopString()},{d.PopString()},{d.PopString()},{d.PopString()}";
                     
                     var fc = new FormationChecker(hand2);
                     
@@ -94,7 +95,7 @@ namespace Winsoft.Gaming.GenericPokerFormationChecker
             Deck = structures.Last().Deck;
 
             return new HandPair(
-                structures.Last().Hand1,
+                structures.Last().Hand1 ?? "",
                 structures.Last().HighestHand2()
             );
         }

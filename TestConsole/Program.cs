@@ -67,7 +67,7 @@ namespace TestConsole
             var d = new Deck();
             d.Shuffle();
             for (var i = 0; i < 52; i += 4)
-                Console.WriteLine($"{i + 1}: {d.Pop()}   {i + 2}: {d.Pop()}   {i + 3}: {d.Pop()}   {i + 4}: {d.Pop()}");
+                Console.WriteLine($"{i + 1}: {d.PopString()}   {i + 2}: {d.PopString()}   {i + 3}: {d.PopString()}   {i + 4}: {d.PopString()}");
         }
 
         public static void TestDeckManager()

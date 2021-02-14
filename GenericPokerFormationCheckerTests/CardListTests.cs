@@ -8,7 +8,7 @@ namespace GenericPokerFormationCheckerTests
         [Fact]
         public void CanCopyList()
         {
-            var cards = new Card[]
+            var cards = new[]
             {
                 Card.Parse("CLB06"),
                 Card.Parse("SPD03"),
