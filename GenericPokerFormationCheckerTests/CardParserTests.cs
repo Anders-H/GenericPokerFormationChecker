@@ -1,4 +1,5 @@
 ﻿using Winsoft.Gaming.GenericPokerFormationChecker;
+using Winsoft.Gaming.GenericPokerFormationChecker.Exceptions;
 using Xunit;
 
 namespace GenericPokerFormationCheckerTests
@@ -79,6 +80,14 @@ namespace GenericPokerFormationCheckerTests
             var card = Card.Parse(source);
             Assert.True(card.Suit == suit);
             Assert.True(card.Value == value);
+        }
+
+        [Fact]
+        public void CantParceUnparcable()
+        {
+            Assert.Throws<ParseCardFailedException>(() => Card.Parse(null));
+            Assert.Throws<ParseCardFailedException>(() => Card.Parse(""));
+            Assert.Throws<ParseCardFailedException>(() => Card.Parse("Sven Hedin"));
         }
     }
 }

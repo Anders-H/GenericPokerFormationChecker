@@ -38,16 +38,30 @@ namespace Winsoft.Gaming.GenericPokerFormationChecker
             Cards.AddRange(newDeck);
         }
 
-        public string Pop()
+        [Obsolete("Use PopString instead.")]
+        public string Pop() =>
+            PopString();
+
+        public string PopString() =>
+            PopCard()?.ToString() ?? "";
+
+        public Card? PopCard()
         {
             if (Count <= 0)
-                return "";
+                return null;
             var ret = Cards[0];
             Cards.RemoveAt(0);
-            return ret.ToString();
+            return ret;
         }
 
+        [Obsolete("Use PeekString instead.")]
         public string Peek() =>
+            PeekString();
+
+        public string PeekString() =>
             Count > 0 ? Cards[0].ToString() : "";
+
+        public Card? PeekCard() =>
+            Count > 0 ? Cards[0] : null;
     }
 }
