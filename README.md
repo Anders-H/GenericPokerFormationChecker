@@ -30,23 +30,29 @@ namespace ConsoleApplication1
 }
 ```
 
-Output:
+Input in example above:
+
+`HRT02, SPD03, HRT04, DMN05, CLB06`
+
+Output from example above:
 
 `FORMATION=STRAIGHT,SCORE=0420,HAND=HRT02*-SPD03*-HRT04*-DMN05*-CLB06*`
 
-Sample input 1:
-
-`CLB06, SPD03, DMN07, DMN05, HRT06`
-
-Output:
-
-`FORMATION=PAIR,SCORE=0112,HAND=SPD03-DMN05-HRT06*-CLB06*-DMN07`
+Star (*) denotes that the card is included in a formation.
 
 Sample input 2:
 
+`CLB06, SPD03, DMN07, DMN05, HRT06`
+
+Output from sample input 2:
+
+`FORMATION=PAIR,SCORE=0112,HAND=SPD03-DMN05-HRT06*-CLB06*-DMN07`
+
+Sample input 3:
+
 `SPD08, SPD09, DMN08, DMN09, CLB08`
 
-Output:
+Output from sample input 3:
 
 `FORMATION=FULL-HOUSE,SCORE=0642,HAND=DMN08*-CLB08*-SPD08*-DMN09*-SPD09*`
 
@@ -54,7 +60,7 @@ Sample input 3:
 
 `HRTAC, SPDAC, DMNAC, DMNKN, CLBAC`
 
-Output:
+Output from sample input 3:
 
 `FORMATION=4-OF-A-KIND,SCORE=0756,HAND=DMNKN-HRTAC*-DMNAC*-CLBAC*-SPDAC*`
 
@@ -62,7 +68,7 @@ Sample input 4:
 
 `HRTAC, SPDKN, DMN10, DMNKI, CLBQU`
 
-Output:
+Output from sample input 4:
 
 `FORMATION=STRAIGHT,SCORE=0460,HAND=DMN10*-SPDKN*-CLBQU*-DMNKI*-HRTAC*`
 
@@ -70,6 +76,8 @@ Sample input 5:
 
 `DMN02, DMNKN, CLBAC, HRT05, CLB09`
 
-Output:
+Output from sample input 6:
 
 `FORMATION=NOTHING,SCORE=0014,HAND=DMN02-HRT05-CLB09-DMNKN-CLBAC*`
+
+Only one present star (*) denotes that no formation was found, and the hand score is equal to the score of the card with the highest score.
