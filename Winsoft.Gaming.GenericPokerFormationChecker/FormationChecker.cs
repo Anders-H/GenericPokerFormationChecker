@@ -9,7 +9,7 @@ namespace Winsoft.Gaming.GenericPokerFormationChecker
         private readonly Card?[] _cards;
         
         internal Formation Formation { get; set; }
-        
+
         internal int Count =>
             _cards.Count(t => !(t == null));
 
@@ -97,7 +97,7 @@ namespace Winsoft.Gaming.GenericPokerFormationChecker
         internal CardList PeekCards()
         {
             var cardList = new CardList();
-            cardList.AddRange(_cards.Where(c => c != null)); // False warnings from compiler - _cards is an array of nullable cards.
+            cardList.AddRange(_cards.Where(c => c! != null!).ToList()!); // TODO
             return cardList;
         }
 
@@ -106,7 +106,7 @@ namespace Winsoft.Gaming.GenericPokerFormationChecker
             var ret = new CardList();
             for (var i = 0; i < _cards.Length; i++)
             {
-                if (_cards[i] != null) // False warnings from compiler - _cards is an array of nullable cards.
+                if (_cards[i]! != null!) // TODO
                     ret.Add(_cards[i]!);
                 _cards[i] = null;
             }
@@ -122,10 +122,10 @@ namespace Winsoft.Gaming.GenericPokerFormationChecker
         }
 
         internal int CountSuit(Suit suit) =>
-            _cards.Count(x => x != null && x.Suit == suit); // False warnings from compiler - _cards is an array of nullable cards.
+            _cards.Count(x => x! != null! && x.Suit == suit); // TODO
 
         internal int CountValue(Value value) =>
-            _cards.Count(x => x != null && x.Value == value); // False warnings from compiler - _cards is an array of nullable cards.
+            _cards.Count(x => x! != null! && x.Value == value); // TODO
 
         internal bool Sort()
         {
