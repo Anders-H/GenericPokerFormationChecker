@@ -1,20 +1,20 @@
 ﻿using System.Collections.Generic;
 
-namespace Winsoft.Gaming.GenericPokerFormationChecker
+namespace Winsoft.Gaming.GenericPokerFormationChecker;
+
+public class CardList : List<Card?>
 {
-    public class CardList : List<Card>
+    public CardList()
     {
-        public CardList()
-        {
-        }
+    }
 
-        public CardList(IEnumerable<Card>? cards)
-        {
-            if (cards == null)
-                return;
+    public CardList(IEnumerable<Card?>? cards)
+    {
+        if (cards == null)
+            return;
 
-            foreach (var card in cards)
+        foreach (var card in cards)
+            if (card != null)
                 Add(card);
-        }
     }
 }

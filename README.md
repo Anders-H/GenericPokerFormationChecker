@@ -1,9 +1,9 @@
 # GenericPokerFormationChecker
-A class that can identify poker hands, for .NET 5.0.
+A class that can identify poker hands, for .NET 6.0.
 
 ![Testconsole](https://winsoft.se/images/pokerformationchecker.jpg)
 
-**Install version 1.0.2 from NuGet:**
+**Install version 1.0.3 from NuGet:**
 
 ```Install-Package PokerFormationChecker```
 
@@ -13,21 +13,20 @@ A class that can identify poker hands, for .NET 5.0.
 using System;
 using Winsoft.Gaming.GenericPokerFormationChecker;
 
-namespace ConsoleApplication1
+namespace ConsoleApplication1;
+
+class Program
 {
-    class Program
+    static void Main(string[] args)
     {
-        static void Main(string[] args)
-        {
-            //Create a formation checker. Add five cards as string.
-            var fm = new FormationChecker("HRT02, SPD03, HRT04, DMN05, CLB06"); //Input. Exception if string contains errors.
+        //Create a formation checker. Add five cards as string.
+        var fm = new FormationChecker("HRT02, SPD03, HRT04, DMN05, CLB06"); //Input. Exception if string contains errors.
 
-            //This will give true the formation is expressed correctly.
-            fm.CheckFormation();
+        //This will give true the formation is expressed correctly.
+        fm.CheckFormation();
 
-            //What is it?
-            Console.WriteLine(fm.ToString()); //Output
-        }
+        //What is it?
+        Console.WriteLine(fm.ToString()); //Output
     }
 }
 ```

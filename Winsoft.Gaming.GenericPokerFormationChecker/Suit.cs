@@ -1,10 +1,9 @@
-﻿namespace Winsoft.Gaming.GenericPokerFormationChecker
+﻿namespace Winsoft.Gaming.GenericPokerFormationChecker;
+
+public enum Suit
 {
-    public enum Suit
-    {
-        Hearts,
-        Diamonds,
-        Clubs,
-        Spades
-    }
+    Hearts,
+    Diamonds,
+    Clubs,
+    Spades
 }

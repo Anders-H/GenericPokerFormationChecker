@@ -1,8 +1,7 @@
-﻿namespace Winsoft.Gaming.GenericPokerFormationChecker
+﻿namespace Winsoft.Gaming.GenericPokerFormationChecker;
+
+public enum Color
 {
-    public enum Color
-    {
-        Red,
-        Black
-    }
+    Red,
+    Black
 }

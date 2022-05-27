@@ -1,13 +1,13 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net5.0</TargetFramework>
+    <TargetFramework>net6.0</TargetFramework>
     <nullable>enable</nullable>
-    <AssemblyVersion>1.0.2</AssemblyVersion>
-    <FileVersion>1.0.2</FileVersion>
-    <Version>1.0.2</Version>
+    <AssemblyVersion>1.0.3</AssemblyVersion>
+    <FileVersion>1.0.3</FileVersion>
+    <Version>1.0.3</Version>
     <Description>Poker hand formation checker with both string only interface and typed interface.</Description>
-    <PackageReleaseNotes>Changed to .NET 5.0.</PackageReleaseNotes>
+    <PackageReleaseNotes>Changed to .NET 6.0.</PackageReleaseNotes>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <Copyright>Anders Hesselbom</Copyright>
     <Authors>Anders Hesselbom</Authors>
@@ -16,12 +16,18 @@
     <PackageProjectUrl>https://github.com/Anders-H/GenericPokerFormationChecker</PackageProjectUrl>
     <PackageIcon>poker.png</PackageIcon>
     <RepositoryUrl>https://github.com/Anders-H/GenericPokerFormationChecker</RepositoryUrl>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <PackageLicenseExpression>GPL-3.0-or-later</PackageLicenseExpression>
   </PropertyGroup>
 
   <ItemGroup>
     <None Include="..\..\poker.png">
       <Pack>True</Pack>
-      <PackagePath></PackagePath>
+      <PackagePath>\</PackagePath>
+    </None>
+    <None Include="..\README.md">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
     </None>
   </ItemGroup>
 

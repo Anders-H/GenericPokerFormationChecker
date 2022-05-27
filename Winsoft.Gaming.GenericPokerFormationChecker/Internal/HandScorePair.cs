@@ -1,15 +1,14 @@
-﻿namespace Winsoft.Gaming.GenericPokerFormationChecker.Internal
+﻿namespace Winsoft.Gaming.GenericPokerFormationChecker.Internal;
+
+internal class HandScorePair
 {
-    internal class HandScorePair
+    public string Hand { get; set; }
+
+    public int Score { get; set; }
+
+    public HandScorePair(string hand, int score)
     {
-        public string Hand { get; set; }
-
-        public int Score { get; set; }
-
-        public HandScorePair(string hand, int score)
-        {
-            Hand = hand;
-            Score = score;
-        }
+        Hand = hand;
+        Score = score;
     }
 }

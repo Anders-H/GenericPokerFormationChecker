@@ -1,32 +1,31 @@
 ﻿using System;
 
-namespace Winsoft.Gaming.GenericPokerFormationChecker.Exceptions
+namespace Winsoft.Gaming.GenericPokerFormationChecker.Exceptions;
+
+public class ParseCardFailedException : SystemException
 {
-    public class ParseCardFailedException : SystemException
+    internal ParseCardFailedException(string message) : base(message)
     {
-        internal ParseCardFailedException(string message) : base(message)
-        {
-        }
     }
+}
 
-    public class ParseSuitFailedException : ParseCardFailedException
+public class ParseSuitFailedException : ParseCardFailedException
+{
+    internal ParseSuitFailedException(string message) : base(message)
     {
-        internal ParseSuitFailedException(string message) : base(message)
-        {
-        }
     }
+}
 
-    public class ParseHandFailedException : SystemException
+public class ParseHandFailedException : SystemException
+{
+    internal ParseHandFailedException(string message) : base(message)
     {
-        internal ParseHandFailedException(string message) : base(message)
-        {
-        }
     }
+}
 
-    public class DuplicateCardException : SystemException
+public class DuplicateCardException : SystemException
+{
+    public DuplicateCardException(string message) : base(message)
     {
-        public DuplicateCardException(string message) : base(message)
-        {
-        }
     }
 }

@@ -1,16 +1,15 @@
-﻿namespace Winsoft.Gaming.GenericPokerFormationChecker
+﻿namespace Winsoft.Gaming.GenericPokerFormationChecker;
+
+public enum Formation
 {
-    public enum Formation
-    {
-        Nothing,
-        Pair,
-        TwoPairs,
-        ThreeOfAKind,
-        Straight,
-        Flush,
-        FullHouse,
-        FourOfAKind,
-        StraightFlush,
-        RoyalFlush
-    }
+    Nothing,
+    Pair,
+    TwoPairs,
+    ThreeOfAKind,
+    Straight,
+    Flush,
+    FullHouse,
+    FourOfAKind,
+    StraightFlush,
+    RoyalFlush
 }
