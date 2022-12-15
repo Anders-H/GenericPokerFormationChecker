@@ -36,6 +36,7 @@ public class DeckManager
             Deck = new Deck();
             Deck.Shuffle();
         }
+
         string[] cards =
         {
             Pop(),
@@ -58,6 +59,7 @@ public class DeckManager
         var deckCount = secondHandQuality > 0 ? secondHandQuality / 8 : 0;
         var redealCount = secondHandQuality % 8;
         var structures = new List<NewDeckStructure>();
+        
         for (var i = 0; i < deckCount + 1; i++)
         {
             var structure = new NewDeckStructure
@@ -69,6 +71,7 @@ public class DeckManager
             structure.Deck.Shuffle();
             structure.Hand1 = $"{d.PopString()},{d.PopString()},{d.PopString()},{d.PopString()},{d.PopString()}";
             var redeals = i < deckCount ? 8 : redealCount + 1;
+            
             for (var j = 0; j < redeals; j++)
             {
                 var hand2 = $"{d.PopString()},{d.PopString()},{d.PopString()},{d.PopString()},{d.PopString()}";
