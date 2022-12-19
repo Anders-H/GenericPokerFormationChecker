@@ -1,4 +1,6 @@
-﻿namespace Winsoft.Gaming.GenericPokerFormationChecker.GameState;
+﻿using System;
+
+namespace Winsoft.Gaming.GenericPokerFormationChecker.GameState;
 
 public class GameRound
 {
@@ -35,7 +37,18 @@ public class GameRound
     {
         var result = new ActionList();
 
-        if (RoundHistory.IsFirstMove || RoundHistory.BothPlayerHasChangedCards || RoundHistory.LastMoveIsPass)
+        if (RoundHistory.LastMoveIsCall)
+        {
+            if (RoundHistory.NoPlaherHasChangedCards)
+                result.Add(Action.ChangeCards);
+        }
+        else if (RoundHistory.LastMoveIsBetOrRaise)
+        {
+            result.Add(Action.Raise);
+            result.Add(Action.Call);
+            result.Add(Action.Drop);
+        }
+        else if (RoundHistory.IsFirstMove || RoundHistory.BothPlayerHasChangedCards || RoundHistory.LastMoveIsPass)
         {
             result.Add(Action.Pass);
             result.Add(Action.Bet);
@@ -49,13 +62,25 @@ public class GameRound
         {
             PotStays = !RoundHistory.BothPlayerHasChangedCards;
         }
-        else
-        {
-            result.Add(Action.Raise);
-            result.Add(Action.Call);
-            result.Add(Action.Drop);
-        }
 
         return result;
+    }
+
+    public void Play(PlayerTurn player, Action action)
+    {
+        var actions = GetAllowedActions();
+
+        if (actions.Count <= 0)
+            throw new SystemException("No actions allowed at this time. Start new round?");
+
+        if (WaitingForPlayer != player)
+            throw new SystemException("Wrong player.");
+
+        if (!actions.IsAllowed(action))
+            throw new SystemException("Wrong action.");
+
+        RoundHistory.Add(new PlayedAction(player, action));
+
+        WaitingForPlayer = WaitingForPlayer == PlayerTurn.Player1 ? PlayerTurn.Player2 : PlayerTurn.Player1;
     }
 }
