@@ -1,7 +1,7 @@
 # GenericPokerFormationChecker
 A class that can identify poker hands, for .NET 6.0.
 
-![Testconsole](https://winsoft.se/images/pokerformationchecker.jpg)
+![Testconsole](https://raw.githubusercontent.com/Anders-H/GenericPokerFormationChecker/master/pokerformationchecker.jpg)
 
 **Install version 1.0.4 from NuGet:**
 
