@@ -3,7 +3,7 @@ A class that can identify poker hands, for .NET 6.0.
 
 ![Testconsole](https://winsoft.se/images/pokerformationchecker.jpg)
 
-**Install version 1.0.3 from NuGet:**
+**Install version 1.0.4 from NuGet:**
 
 ```Install-Package PokerFormationChecker```
 
