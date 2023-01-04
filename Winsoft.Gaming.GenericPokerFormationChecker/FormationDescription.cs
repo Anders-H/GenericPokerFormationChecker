@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Text;
 
 namespace Winsoft.Gaming.GenericPokerFormationChecker;
@@ -24,43 +23,7 @@ public class FormationDescription
     {
         var s = new StringBuilder();
         s.Append("FORMATION=");
-
-        switch (Formation)
-        {
-            case Formation.Pair:
-                s.Append("PAIR");
-                break;
-            case Formation.TwoPairs:
-                s.Append("2-PAIRS");
-                break;
-            case Formation.ThreeOfAKind:
-                s.Append("3-OF-A-KIND");
-                break;
-            case Formation.Straight:
-                s.Append("STRAIGHT");
-                break;
-            case Formation.Flush:
-                s.Append("FLUSH");
-                break;
-            case Formation.FullHouse:
-                s.Append("FULL-HOUSE");
-                break;
-            case Formation.FourOfAKind:
-                s.Append("4-OF-A-KIND");
-                break;
-            case Formation.StraightFlush:
-                s.Append("STRAIGHT-FLUSH");
-                break;
-            case Formation.RoyalFlush:
-                s.Append("ROYAL-FLUSH");
-                break;
-            case Formation.Nothing:
-                s.Append("NOTHING");
-                break;
-            default:
-                throw new ArgumentOutOfRangeException();
-        }
-
+        s.Append(FormationHelper.ToString(Formation));
         s.Append(",SCORE=");
         s.Append(Score.ToString("0000"));
         s.Append(",HAND=");

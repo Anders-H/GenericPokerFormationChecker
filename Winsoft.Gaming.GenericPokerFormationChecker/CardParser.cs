@@ -13,12 +13,20 @@ internal class CardParser
             
         if (card == "")
             throw new Exceptions.ParseCardFailedException(string.Format(description, "An empty string"));
-            
+
+        var inFormation = false;
+
+        if (card.EndsWith("*"))
+        {
+            inFormation = true;
+            card = card.Substring(0, card.Length - 1);
+        }
+        
         if (card.Length != 4 && card.Length != 5)
             throw new Exceptions.ParseCardFailedException(string.Format(description, card));
             
         var suitString = card.Substring(0, 3);
-            
+        
         var suit = suitString switch
         {
             "HRT" => Suit.Hearts,
@@ -63,6 +71,6 @@ internal class CardParser
             _ => throw new Exceptions.ParseCardFailedException($"{valueString} cannot be parsed as a value.")
         };
 
-        return new Card(suit, value);
+        return new Card(suit, value, inFormation);
     }
 }

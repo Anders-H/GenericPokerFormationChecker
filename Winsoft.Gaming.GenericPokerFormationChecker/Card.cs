@@ -14,7 +14,7 @@ public class Card : IComparable<Card>
 
     public Value Value { get; }
 
-    public bool InFormation { get; internal set; } = false;
+    public bool InFormation { get; internal set; }
 
     public int Score =>
         (int)Value;
@@ -23,7 +23,18 @@ public class Card : IComparable<Card>
     {
         Suit = suit;
         Value = value;
+        InFormation = false;
     }
+
+    public Card(Suit suit, Value value, bool inFormation)
+    {
+        Suit = suit;
+        Value = value;
+        InFormation = inFormation;
+    }
+
+    public bool Is(Suit suit, Value value, bool inFormation) =>
+        Suit == suit && Value == value && InFormation == inFormation;
 
     protected bool Equals(Card other) =>
         Suit == other.Suit && Value == other.Value && InFormation == other.InFormation;
