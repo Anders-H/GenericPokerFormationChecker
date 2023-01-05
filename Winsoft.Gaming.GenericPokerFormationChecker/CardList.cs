@@ -19,7 +19,7 @@ public class CardList : List<Card?>
                 Add(card);
     }
 
-    public CardListParseResult Parse(string hand)
+    public virtual CardListParseResult Parse(string hand)
     {
         Clear();
 

@@ -3,7 +3,7 @@ A class that can identify poker hands, for .NET 6.0.
 
 ![Testconsole](https://raw.githubusercontent.com/Anders-H/GenericPokerFormationChecker/master/pokerformationchecker.jpg)
 
-**Install version 1.0.4 from NuGet:**
+**Install version 1.0.5 from NuGet:**
 
 ```Install-Package PokerFormationChecker```
 
@@ -82,3 +82,23 @@ Output from sample input 6:
 `FORMATION=NOTHING,SCORE=0014,HAND=DMN02-HRT05-CLB09-DMNKN-CLBAC*`
 
 Only one present star (*) denotes that no formation was found, and the hand score is equal to the score of the card with the highest score.
+
+In version 1.0,5 or higher is the class Hand self contained.
+
+
+```
+[Fact]
+public void CanCheckFormations()
+{
+    var x = new Hand
+    {
+        { Suit.Clubs, Value.Value02 },
+        { Suit.Hearts, Value.Value02 },
+        { Suit.Spades, Value.Value02 },
+        { Suit.Clubs, Value.Value03 },
+        { Suit.Hearts, Value.Value03 }
+    };
+    Assert.Equal(612, x.Score);
+    Assert.Equal(Formation.FullHouse, x.Formation);
+}
+```

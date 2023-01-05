@@ -10,21 +10,12 @@ public class FormationChecker
         
     internal Formation Formation { get; set; }
 
-    internal int Count =>
-        _cards.Count(t => !(t == null));
-
-    internal int Score
+    public FormationChecker(Hand hand)
     {
-        get
-        {
-            var ret = 0;
-            
-            for (var i = 0; i < 5; i++)
-                if (_cards[i]?.InFormation ?? false)
-                    ret += _cards[i]!.Score;
+        _cards = new Card?[5];
 
-            return ret + (int)Formation * 100;
-        }
+        for (var i = 0; i < 5; i++)
+            _cards[i] = hand[i];
     }
 
     public FormationChecker(string hand)
@@ -66,6 +57,23 @@ public class FormationChecker
             {
                 throw new ParseHandFailedException($"Failed to parse card {i + 1}/5.");
             }
+        }
+    }
+
+    internal int Count =>
+        _cards.Count(t => !(t == null));
+
+    internal int Score
+    {
+        get
+        {
+            var ret = 0;
+
+            for (var i = 0; i < 5; i++)
+                if (_cards[i]?.InFormation ?? false)
+                    ret += _cards[i]!.Score;
+
+            return ret + (int)Formation * 100;
         }
     }
 
