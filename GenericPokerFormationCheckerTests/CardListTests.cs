@@ -28,7 +28,7 @@ public class CardListTests
     {
         var x = new CardList();
 
-        var result = x.Parse(@"FORMATION=3-OF-A-KIND,SCORE=0324,HAND=DMN04-DMN05-HRT08*-CLB08*-SPD08*");
+        var result = x.Parse("FORMATION=3-OF-A-KIND,SCORE=0324,HAND=DMN04-DMN05-HRT08*-CLB08*-SPD08*");
         Assert.True(result.Success);
         Assert.Equal(5, x.Count);
         Assert.True(x[0]!.Is(Suit.Diamonds, Value.Value04, false));

@@ -14,7 +14,7 @@ public class FormationDescription
     internal FormationDescription(Formation formation, IEnumerable<Card> cards, int score)
     {
         Formation = formation;
-        Cards = new CardList();
+        Cards = [];
         Cards.AddRange(cards);
         Score = score;
     }
@@ -29,6 +29,7 @@ public class FormationDescription
         s.Append(",HAND=");
 
         if (Cards.Count > 0)
+        {
             for (var i = 0; i < Cards.Count; i++)
             {
                 s.Append(Cards[i] == null
@@ -37,11 +38,14 @@ public class FormationDescription
 
                 if (Cards[i] != null && Cards[i]!.InFormation)
                     s.Append('*');
-                    
+
                 s.Append(i < Cards.Count - 1 ? "-" : "");
             }
+        }
         else
+        {
             s.Append("NONE");
+        }
 
         return s.ToString();
     }

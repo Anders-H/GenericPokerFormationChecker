@@ -37,15 +37,7 @@ public class DeckManager
             Deck.Shuffle();
         }
 
-        string[] cards =
-        {
-            Pop(),
-            Pop(),
-            Pop(),
-            Pop(),
-            Pop()
-        };
-
+        string[] cards = [Pop(), Pop(), Pop(), Pop(), Pop()];
         return string.Join(", ", cards);
     }
 
@@ -75,17 +67,12 @@ public class DeckManager
             for (var j = 0; j < redeals; j++)
             {
                 var hand2 = $"{d.PopString()},{d.PopString()},{d.PopString()},{d.PopString()},{d.PopString()}";
-                    
                 var fc = new FormationChecker(hand2);
-                    
                 fc.CheckFormation();
-                    
                 var hand2Score = fc.Score;
-                    
-                structure.Hands2.Add(
-                    new HandScorePair(hand2, hand2Score)
-                );
+                structure.Hands2.Add(new HandScorePair(hand2, hand2Score));
             }
+
             structures.Add(structure);
         }
 

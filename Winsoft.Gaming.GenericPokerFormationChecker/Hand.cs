@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Winsoft.Gaming.GenericPokerFormationChecker;
 
@@ -64,11 +65,8 @@ public class Hand : CardList
 
     private void UniqueOrThrow()
     {
-        foreach (var c in this)
-        {
-            if (c == null)
-                throw new ArgumentOutOfRangeException();
-        }
+        if (this.Any(c => c == null))
+            throw new ArgumentOutOfRangeException();
 
         if (Count <= 0)
             return;
@@ -92,9 +90,7 @@ public class Hand : CardList
             return;
 
         var fm = new FormationChecker(this);
-
         fm.CheckFormation();
-
         Formation = fm.Formation;
         Score = fm.Score;
     }

@@ -13,7 +13,7 @@ public class GameRound
     {
         RoundStarter = PlayerTurn.Player1;
         WaitingForPlayer = RoundStarter;
-        RoundHistory = new PlayedActionList();
+        RoundHistory = [];
         PotStays = false;
     }
 
@@ -21,7 +21,7 @@ public class GameRound
     {
         RoundStarter = PlayerTurn.Player1;
         WaitingForPlayer = RoundStarter;
-        RoundHistory = new PlayedActionList();
+        RoundHistory = [];
         PotStays = false;
     }
 
@@ -39,7 +39,7 @@ public class GameRound
 
         if (RoundHistory.LastMoveIsCall)
         {
-            if (RoundHistory.NoPlaherHasChangedCards)
+            if (RoundHistory.NoPlayerHasChangedCards)
                 result.Add(Action.ChangeCards);
         }
         else if (RoundHistory.LastMoveIsBetOrRaise)
@@ -80,7 +80,6 @@ public class GameRound
             throw new SystemException("Wrong action.");
 
         RoundHistory.Add(new PlayedAction(player, action));
-
         WaitingForPlayer = WaitingForPlayer == PlayerTurn.Player1 ? PlayerTurn.Player2 : PlayerTurn.Player1;
     }
 }

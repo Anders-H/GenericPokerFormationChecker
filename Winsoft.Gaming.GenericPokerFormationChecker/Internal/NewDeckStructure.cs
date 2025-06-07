@@ -5,16 +5,13 @@ namespace Winsoft.Gaming.GenericPokerFormationChecker.Internal;
 internal class NewDeckStructure
 {
     private int _highestDeck2Score = -1;
-
     internal string? Hand1 { get; set; }
-        
     internal HandScorePairList Hands2 { get; }
-        
     internal Deck? Deck { get; set; }
 
     internal NewDeckStructure()
     {
-        Hands2 = new HandScorePairList();
+        Hands2 = [];
     }
 
     internal int HighestDeck2Score
@@ -33,7 +30,6 @@ internal class NewDeckStructure
             });
                 
             _highestDeck2Score = s;
-                
             return _highestDeck2Score;
         }
     }

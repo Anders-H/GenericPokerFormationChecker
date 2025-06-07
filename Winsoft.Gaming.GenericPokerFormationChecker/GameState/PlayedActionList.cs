@@ -32,6 +32,6 @@ public class PlayedActionList : List<PlayedAction>
     public bool LastMoveIsBetOrRaise =>
         LastMoveIsBet || LastMoveIsRaise;
 
-    public bool NoPlaherHasChangedCards =>
+    public bool NoPlayerHasChangedCards =>
         this.All(x => x.Action != Action.ChangeCards);
 }

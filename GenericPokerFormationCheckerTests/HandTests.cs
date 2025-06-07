@@ -11,7 +11,7 @@ public class HandTests
     public void CanParseHands()
     {
         var x = new Hand();
-        Assert.True(x.Parse(@"FORMATION=3-OF-A-KIND,SCORE=0324,HAND=DMN04-DMN05-HRT08*-CLB08*-SPD08*"));
+        Assert.True(x.Parse("FORMATION=3-OF-A-KIND,SCORE=0324,HAND=DMN04-DMN05-HRT08*-CLB08*-SPD08*"));
         Assert.Equal(5, x.Count);
         Assert.Equal(324, x.Score);
         Assert.Equal(Formation.ThreeOfAKind, x.Formation);
@@ -25,27 +25,30 @@ public class HandTests
     [Fact]
     public void CannotAddNullsDuplicates()
     {
-        var x = new Hand();
-        x.Add(Suit.Diamonds, Value.Value03);
-        x.Add(Suit.Diamonds, Value.Value04);
-        Assert.Throws<ArgumentOutOfRangeException>(() => x.Add(Suit.Diamonds, Value.Value03));
+        var x = new Hand
+        {
+            { Suit.Diamonds, Value.Value03 },
+            { Suit.Diamonds, Value.Value04 }
+        };
 
+        Assert.Throws<ArgumentOutOfRangeException>(() => x.Add(Suit.Diamonds, Value.Value03));
         var y = new Hand();
-        Assert.Throws<ParseCardFailedException>(() => x.Add(null));
+        Assert.Throws<ParseCardFailedException>(() => y.Add(null!));
     }
 
-[Fact]
-public void CanCheckFormations()
-{
-    var x = new Hand
+    [Fact]
+    public void CanCheckFormations()
     {
-        { Suit.Clubs, Value.Value02 },
-        { Suit.Hearts, Value.Value02 },
-        { Suit.Spades, Value.Value02 },
-        { Suit.Clubs, Value.Value03 },
-        { Suit.Hearts, Value.Value03 }
-    };
-    Assert.Equal(612, x.Score);
-    Assert.Equal(Formation.FullHouse, x.Formation);
-}
+        var x = new Hand
+        {
+            { Suit.Clubs, Value.Value02 },
+            { Suit.Hearts, Value.Value02 },
+            { Suit.Spades, Value.Value02 },
+            { Suit.Clubs, Value.Value03 },
+            { Suit.Hearts, Value.Value03 }
+        };
+
+        Assert.Equal(612, x.Score);
+        Assert.Equal(Formation.FullHouse, x.Formation);
+    }
 }

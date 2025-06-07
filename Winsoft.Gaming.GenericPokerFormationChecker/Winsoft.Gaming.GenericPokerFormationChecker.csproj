@@ -1,13 +1,13 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net6.0</TargetFramework>
+    <TargetFramework>net8.0</TargetFramework>
     <nullable>enable</nullable>
-    <AssemblyVersion>1.0.5</AssemblyVersion>
-    <FileVersion>1.0.5</FileVersion>
-    <Version>1.0.5</Version>
+    <AssemblyVersion>1.1.0</AssemblyVersion>
+    <FileVersion>1.1.0</FileVersion>
+    <Version>1.1.0</Version>
     <Description>Poker hand formation checker with both string only interface and typed interface.</Description>
-    <PackageReleaseNotes>Introduced the Hand class that can be initiated from string based class or be used on its own to check formations.</PackageReleaseNotes>
+    <PackageReleaseNotes>Moved to .NET 8.0.</PackageReleaseNotes>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <Copyright>Anders Hesselbom</Copyright>
     <Authors>Anders Hesselbom</Authors>
@@ -21,7 +21,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Include="..\..\poker.png">
+    <None Include="..\poker.png">
       <Pack>True</Pack>
       <PackagePath>\</PackagePath>
     </None>

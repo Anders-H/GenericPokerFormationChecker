@@ -83,7 +83,7 @@ public class CardParserTests
     }
 
     [Fact]
-    public void CantParceUnparsable()
+    public void CantParseUnparsable()
     {
         Assert.Throws<ParseCardFailedException>(() => Card.Parse(null!));
         Assert.Throws<ParseCardFailedException>(() => Card.Parse(""));

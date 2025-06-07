@@ -70,8 +70,10 @@ public class FormationChecker
             var ret = 0;
 
             for (var i = 0; i < 5; i++)
+            {
                 if (_cards[i]?.InFormation ?? false)
                     ret += _cards[i]!.Score;
+            }
 
             return ret + (int)Formation * 100;
         }
@@ -86,8 +88,10 @@ public class FormationChecker
     internal int PutCard(Card card)
     {
         var i = GetFirstFreeIndex();
+
         if (i >= 0 && i < _cards.Length)
             _cards[i] = card;
+        
         return i;
     }
 
@@ -129,8 +133,10 @@ public class FormationChecker
     internal int GetFirstFreeIndex()
     {
         for (var i = 0; i < _cards.Length; i++)
+        {
             if (_cards[i] == null)
                 return i;
+        }
 
         return -1;
     }
@@ -178,6 +184,7 @@ public class FormationChecker
             
         //Clear formation.
         Formation = Formation.Nothing;
+
         foreach (var t in _cards)
         {
             if (t == null)
@@ -218,9 +225,13 @@ public class FormationChecker
 
         //Precheck pair count.
         var doubleCount = 0;
+        
         for (var i = 0; i < 5; i++)
+        {
             if (valueRepresentations[i] == 2)
                 doubleCount++;
+        }
+
         var twoPairs = doubleCount == 4;
         var onePair = doubleCount == 2;
 
@@ -242,7 +253,6 @@ public class FormationChecker
         if (valueRepresentations[0] == 4 || valueRepresentations[1] == 4)
         {
             Formation = Formation.FourOfAKind;
-
             var value = valueRepresentations[0] == 4 ? _cards[0]!.Value : _cards[1]!.Value;
                 
             for (var i = 0; i < 5; i++)
@@ -255,8 +265,10 @@ public class FormationChecker
         if ((valueRepresentations[0] == 2 && valueRepresentations[4] == 3) || (valueRepresentations[0] == 3 && valueRepresentations[4] == 2))
         {
             Formation = Formation.FullHouse;
+
             foreach (var t in _cards)
                 t!.InFormation = true;
+            
             return true;
         }
 
@@ -278,6 +290,7 @@ public class FormationChecker
         if (valueRepresentations[0] == 3 || valueRepresentations[2] == 3 || valueRepresentations[4] == 3)
         {
             Formation = Formation.ThreeOfAKind;
+
             if (valueRepresentations[0] == 3)
             {
                 _cards[0]!.InFormation = true;
@@ -296,6 +309,7 @@ public class FormationChecker
                 _cards[2]!.InFormation = true;
                 _cards[3]!.InFormation = true;
             }
+
             return true;
         }
 
@@ -303,8 +317,10 @@ public class FormationChecker
         if (twoPairs)
         {
             Formation = Formation.TwoPairs;
+
             for (var i = 0; i < 5; i++)
                 _cards[i]!.InFormation = valueRepresentations[i] == 2;
+            
             return true;
         }
 
@@ -312,10 +328,13 @@ public class FormationChecker
         if (onePair)
         {
             Formation = Formation.Pair;
+
             for (var i = 0; i < 5; i++)
                 _cards[i]!.InFormation = valueRepresentations[i] == 2;
+            
             return true;
         }
+
         Formation = Formation.Nothing;
         _cards[4]!.InFormation = true;
         return true;
