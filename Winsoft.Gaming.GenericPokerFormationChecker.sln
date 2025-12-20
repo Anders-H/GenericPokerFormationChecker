@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.30907.101
+# Visual Studio Version 18
+VisualStudioVersion = 18.3.11222.16 d18.3
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Winsoft.Gaming.GenericPokerFormationChecker", "Winsoft.Gaming.GenericPokerFormationChecker\Winsoft.Gaming.GenericPokerFormationChecker.csproj", "{00207E14-FCED-4128-8B23-9D215E9C47F7}"
 EndProject
@@ -13,6 +13,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GenericPokerFormationCheckerTests", "GenericPokerFormationCheckerTests\GenericPokerFormationCheckerTests.csproj", "{B8E02E93-22A1-47B1-87B0-215C9299B6C3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PokerExampleApp", "PokerExampleApp\PokerExampleApp.csproj", "{DDE7B335-211A-498A-8002-584903760DB1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -32,6 +34,10 @@ Global
 		{B8E02E93-22A1-47B1-87B0-215C9299B6C3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B8E02E93-22A1-47B1-87B0-215C9299B6C3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B8E02E93-22A1-47B1-87B0-215C9299B6C3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DDE7B335-211A-498A-8002-584903760DB1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DDE7B335-211A-498A-8002-584903760DB1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DDE7B335-211A-498A-8002-584903760DB1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DDE7B335-211A-498A-8002-584903760DB1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

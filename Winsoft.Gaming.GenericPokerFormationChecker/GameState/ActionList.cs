@@ -10,4 +10,12 @@ public class ActionList : List<Action>
 
     public bool AreOnlyAllowed(params Action[] actions) =>
         Count == actions.Length && actions.All(IsAllowed);
+
+    public void AddAllowedAction(Action action)
+    {
+        if (Exists(x => x == action))
+            return;
+
+        Add(action);
+    }
 }
