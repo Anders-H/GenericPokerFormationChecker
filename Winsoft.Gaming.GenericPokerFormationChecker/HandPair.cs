@@ -3,7 +3,6 @@
 public class HandPair
 {
     public string Hand1 { get; set; }
-
     public string Hand2 { get; set; }
 
     public HandPair(string hand1, string hand2)

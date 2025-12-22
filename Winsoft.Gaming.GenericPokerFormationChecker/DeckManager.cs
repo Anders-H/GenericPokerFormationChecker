@@ -41,6 +41,9 @@ public class DeckManager
         return string.Join(", ", cards);
     }
 
+    public HandPair PopHands(ComputerPlayerSkillLevel computerPlayerSkillLevel) =>
+        PopHands(ComputerPlayerSkillLevelHelper.FromLevelToQuality(computerPlayerSkillLevel));
+
     /// <summary>
     ///     For a cheating computer player in a poker game, creates a used deck with enough cards left for one player to make one swap.
     /// </summary>

@@ -30,7 +30,7 @@ public class CardList : List<Card?>
             var scoreRaw = outerParts[1];
             var cardsRaw = outerParts[2];
 
-            var cards = cardsRaw.Split('-');
+            var cards = cardsRaw.Split('-', ',');
             cards[0] = cards[0].Split('=')[1];
 
             if (cards.Length != 5)

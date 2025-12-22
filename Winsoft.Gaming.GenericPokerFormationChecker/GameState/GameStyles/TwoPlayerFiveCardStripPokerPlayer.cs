@@ -1,4 +1,6 @@
-﻿namespace Winsoft.Gaming.GenericPokerFormationChecker.GameState.GameStyles;
+﻿using System.Runtime.InteropServices;
+
+namespace Winsoft.Gaming.GenericPokerFormationChecker.GameState.GameStyles;
 
 public class TwoPlayerFiveCardStripPokerPlayer : IPlayer
 {
@@ -7,7 +9,7 @@ public class TwoPlayerFiveCardStripPokerPlayer : IPlayer
     public int Money { get; private set; }
     public int CurrentClothing { get; set; } // 0-3 where 0 is fully clothed and 3 least clothed, 4 is naked
     private string[] ClothingNames { get; }
-
+    public Hand? Hand { get; set; }
 
     public TwoPlayerFiveCardStripPokerPlayer(string name, bool isHuman, string clotheName1, string clotheName2, string clotheName3, string clotheName4)
     {

@@ -22,6 +22,16 @@ public class Hand : CardList
         CheckFormation();
     }
 
+    public Hand(string source)
+    {
+        var cards = source.Split('-', ',');
+
+        for (var i = 0; i < 5; i++)
+            Add(Card.Parse(cards[i]));
+
+        CheckFormation();
+    }
+
     public new bool Parse(string hand)
     {
         Formation = Formation.Nothing;
@@ -36,7 +46,6 @@ public class Hand : CardList
         Score = result.Score;
         UniqueOrThrow();
         CheckFormation();
-
         return true;
     }
 
@@ -94,4 +103,7 @@ public class Hand : CardList
         Formation = fm.Formation;
         Score = fm.Score;
     }
+
+    public override string ToString() =>
+        $"{this[0]} {this[1]} {this[2]} {this[3]} {this[4]} ({Formation})";
 }
