@@ -66,6 +66,9 @@ public class GameRound
         return result;
     }
 
+    public bool ActionAllowed(Action action) =>
+        GetAllowedActions().IsAllowed(action);
+
     public void Play(PlayerTurn player, Action action)
     {
         var actions = GetAllowedActions();

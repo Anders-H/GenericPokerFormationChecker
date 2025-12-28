@@ -1,15 +1,22 @@
-﻿using System.Text;
+﻿using System;
+using System.Text;
 
 namespace Winsoft.Gaming.GenericPokerFormationChecker.GameState.GameStyles;
 
 public class TwoPlayerFiveCardStripPoker
 {
+    public static readonly Random Random;
     public TwoPlayerFiveCardStripPokerPlayer Player1 { get; }
     public TwoPlayerFiveCardStripPokerPlayer Player2 { get; }
     public DeckManager? DeckManager { get; private set; }
     public GameRound? GameRound { get; private set; }
     public PlayedActionList RoundHistory { get; private set; }
     public ComputerPlayerSkillLevel ComputerSkillLevel { get; private set; }
+
+    static TwoPlayerFiveCardStripPoker()
+    {
+        Random = new Random();
+    }
 
     public TwoPlayerFiveCardStripPoker(TwoPlayerFiveCardStripPokerPlayer humanPlayer, TwoPlayerFiveCardStripPokerPlayer computerPlayer)
     {
@@ -46,7 +53,10 @@ public class TwoPlayerFiveCardStripPoker
         return GameRound;
     }
 
-    public override string ToString()
+    public override string ToString() =>
+        ToString(GameRound?.GetAllowedActions() ?? []);
+
+    public string ToString(ActionList actions)
     {
         if (GameRound == null)
             return "Game is not started.";
@@ -56,7 +66,6 @@ public class TwoPlayerFiveCardStripPoker
         s.AppendLine($"Current player is {GameRound.WaitingForPlayer}.");
         s.AppendLine();
         s.AppendLine("Allowed actions are:");
-        var actions = GameRound.GetAllowedActions();
         var actionNumber = 0;
 
         foreach (var action in actions)
@@ -89,4 +98,22 @@ public class TwoPlayerFiveCardStripPoker
 
     private static int GetPlayerNumber(PlayerTurn player) =>
         player == PlayerTurn.Player1 ? 1 : 2; // Note: Only two players are supported
+
+    public bool ActionAllowed(PlayedAction action) =>
+        GameRound != null && GameRound.ActionAllowed(action.Action);
+
+    public bool ActionAllowed(Action action) =>
+        GameRound != null && GameRound.ActionAllowed(action);
+
+    public Action GetComputerAction()
+    {
+        // TODO: Create some intelligence here.
+        var actions = GameRound?.GetAllowedActions() ?? [];
+
+        if (actions.Count <= 0)
+            throw new InvalidOperationException("No allowed actions for computer player.");
+
+        var index = Random.Next(0, actions.Count);
+        return actions[index];
+    }
 }
