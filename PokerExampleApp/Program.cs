@@ -34,21 +34,42 @@ do
         action = pokerGame.GetComputerAction();
     }
 
+    PlayedAction? playedAction;
+
     if (pokerGame.ActionAllowed(action))
     {
         if (round.WaitingForPlayer == PlayerTurn.Player1)
         {
-
+            switch (action) {
+                case Action.Bet:
+                    break;
+                case Action.Pass:
+                    break;
+                case Action.Drop:
+                    break;
+                case Action.Call:
+                    break;
+                case Action.Raise:
+                    break;
+                case Action.ChangeCards:
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
         }
         else
         {
-            
+            playedAction = pokerGame.DressAction(action);
         }
     }
     else
     {
-        throw new SystemException("Poker game is broken.");
+        throw new SystemException("Poker game is broken. Unallowed action given.");
     }
+
+    if (playedAction == null)
+        throw new SystemException("Poker game is broken. Failed to dress action.");
+
 } while (true);
 
 static int GetAction(int count)

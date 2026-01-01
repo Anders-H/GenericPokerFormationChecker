@@ -116,4 +116,54 @@ public class TwoPlayerFiveCardStripPoker
         var index = Random.Next(0, actions.Count);
         return actions[index];
     }
+
+    public PlayedAction DressAction(Action action)
+    {
+        // TODO: Create some intelligence here.
+        switch (action)
+        {
+            case Action.Bet:
+                switch (Random.Next(5))
+                {
+                    case 0:
+                        return new PlayedAction(PlayerTurn.Player2, Action.Bet, 5);
+                    case 1:
+                        return new PlayedAction(PlayerTurn.Player2, Action.Bet, 10);
+                    case 2:
+                        return new PlayedAction(PlayerTurn.Player2, Action.Bet, 15);
+                    case 3:
+                        return new PlayedAction(PlayerTurn.Player2, Action.Bet, 20);
+                    case 4:
+                        return new PlayedAction(PlayerTurn.Player2, Action.Bet, 25);
+                    default:
+                        throw new SystemException("What?");
+                }
+            case Action.Pass:
+                return new PlayedAction(PlayerTurn.Player2, Action.Pass, 0);
+            case Action.Drop:
+                return new PlayedAction(PlayerTurn.Player2, Action.Drop, 0);
+            case Action.Call:
+                return new PlayedAction(PlayerTurn.Player2, Action.Call, 0);
+            case Action.Raise:
+                switch (Random.Next(5))
+                {
+                    case 0:
+                        return new PlayedAction(PlayerTurn.Player2, Action.Raise, 5);
+                    case 1:
+                        return new PlayedAction(PlayerTurn.Player2, Action.Raise, 10);
+                    case 2:
+                        return new PlayedAction(PlayerTurn.Player2, Action.Raise, 15);
+                    case 3:
+                        return new PlayedAction(PlayerTurn.Player2, Action.Raise, 20);
+                    case 4:
+                        return new PlayedAction(PlayerTurn.Player2, Action.Raise, 25);
+                    default:
+                        throw new SystemException("What?");
+                }
+            case Action.ChangeCards:
+                return new PlayedAction(PlayerTurn.Player2, Action.Call, Random.Next(6));
+            default:
+                throw new ArgumentOutOfRangeException(nameof(action), action, null);
+        }
+    }
 }

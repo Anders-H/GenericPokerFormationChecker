@@ -12,4 +12,9 @@ public class PlayedAction
         Action = action;
         Parameter = parameter;
     }
+
+    public override string ToString()
+    {
+        return "";
+    }
 }
